@@ -35,23 +35,37 @@ export default {
   align-items: center;
   padding: 20px;
   margin-top: auto;
+  position: fixed;
   bottom: 0;
+  left: 0;
+  width: 100%;
 }
 
 .container {
-  flex: 1;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 15px;
+}
+
+.logo {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  width: 180px;
+  height: 180px;
+  border-radius: 20px;
 }
 
 .contact {
-  display: flex;
-  justify-content: space-between;
+  grid-column-start: 2;
+  grid-column-end: 3;
+  justify-content: left;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
 }
 
 .column {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
