@@ -1,6 +1,9 @@
 <template>
   <div class="home">
     <NavbarTop/>
+    <div class="pannellum">
+      <v-pannellum :config="config" :src="require('@/assets/amazon.jpg')" style="height: 500px;"></v-pannellum>
+    </div>
     <FooterApp/>
   </div>
 </template>
@@ -12,9 +15,24 @@ import FooterApp from "@/components/Footer.vue";
 
 export default defineComponent({
   name: 'HomeView',
+  data() {
+    return {
+      config: {
+        // Aquí puedes configurar los parámetros de la imagen panorámica
+        type: 'equirectangular',
+        autoLoad: true,
+      },
+    };
+  },
   components: {
     NavbarTop,
     FooterApp
   },
 });
 </script>
+
+<style scoped>
+.pannellum {
+  margin-top: 6em;
+}
+</style>

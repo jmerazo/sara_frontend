@@ -2,10 +2,11 @@
   <div class="navbar">
     <a href="#"><img class="log-sara" src="../assets/sara.png"/></a>
     <ul class="nav-links">
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#">Servicios</a></li>
-      <li><a href="#">Acerca de</a></li>
-      <li><a href="#">Contacto</a></li>
+      <li><a href="#">FAMILIAS</a></li>
+      <li><a href="#">NOMBRE CIENTÍFICO</a></li>
+      <li><a href="#">NOMBRE COMÚN</a></li>
+      <li><a href="#">SELECTOR DE ESPECIES</a></li>
+      <li><a href="#">CONTACTENOS</a></li>
     </ul>
   </div>
 </template>
@@ -32,6 +33,10 @@ export default {
   margin-right: 20px;
   width: 70px;
   height: 56px;
+}
+
+.logo-sara::after {
+  background-color: azure;
 }
 
 .nav-links {
