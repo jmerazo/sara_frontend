@@ -1,11 +1,12 @@
 <template>
-  <navbar-top></navbar-top>
+  <NavbarTop/>
   <router-view/>
 </template>
 
 <script lang="ts">
 import NavbarTop from "@/components/Navbar.vue";
 import {defineComponent} from "vue";
+
 
 export default defineComponent({
   name: 'App',

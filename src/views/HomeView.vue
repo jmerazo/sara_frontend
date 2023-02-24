@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <NavbarTop/>
     <div class="pannellum">
       <v-pannellum :config="config" :src="require('@/assets/amazon.jpg')" style="height: 500px;"></v-pannellum>
     </div>
@@ -10,7 +9,6 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import NavbarTop from "@/components/Navbar.vue";
 import FooterApp from "@/components/Footer.vue";
 
 export default defineComponent({
@@ -25,7 +23,6 @@ export default defineComponent({
     };
   },
   components: {
-    NavbarTop,
     FooterApp
   },
 });
