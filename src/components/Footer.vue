@@ -35,10 +35,10 @@ export default {
   align-items: center;
   padding: 20px;
   margin-top: auto;
-  position: fixed;
+  position: relative;
   bottom: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
 }
 
 .container {
