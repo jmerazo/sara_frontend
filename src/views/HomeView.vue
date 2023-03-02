@@ -1,13 +1,17 @@
 <template>
   <div class="home">
     <!--TitleLink :title="myTitle" :icon="myIcon"/-->
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide"><img src="../assets/media/r1.jpg" /></div>
-        <div class="swiper-slide"><img src="../assets/media/r2.jpg" /></div>
-        <div class="swiper-slide"><img src="../assets/media/r3.jpg" /></div>
+    <div class="c-slider">
+      <div class="slider">
+        <div class="swiper-container">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide"><img src="../assets/media/r1.jpg" /></div>
+            <div class="swiper-slide"><img src="../assets/media/r2.jpg" /></div>
+            <div class="swiper-slide"><img src="../assets/media/r3.jpg" /></div>
+          </div>
+          <div class="swiper-pagination"></div>
+        </div>
       </div>
-      <div class="swiper-pagination"></div>
     </div>
 
     <div class="search-data">
@@ -61,9 +65,9 @@
     </div>
 
     <div class="colaborators">
-      <img src="../assets/minciencias-logo.png" class="log-minciencia">
-      <img src="../assets/corpoamazonia.png" class="log-corpoamazonia">
-
+      <img src="../assets/minciencias-logo.png" class="log-minciencia fixed-between">
+      <img src="../assets/corpoamazonia.png" class="log-corpoamazonia fixed-between">
+      <img src="../assets/logo-eco-jardines.png" class="log-ecojardines fixed-between">
     </div>
     
     
@@ -105,6 +109,8 @@ export default defineComponent({
       pagination: {
         el: '.swiper-pagination',
       },
+      slidesPerView: 1,
+      spaceBetween: 10,
     });
     
   }
@@ -115,24 +121,41 @@ export default defineComponent({
 .home {
   margin: 0;
   padding: 0;
+  font-size: 0;
+  flex-direction: column;
+  display: flex;
 
   justify-content: center;
   align-items: center;
 
   display: grid;
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
+  grid-row-gap: 0;
+}
+
+.c-slider {
+  position: relative;
+  width: 100vw;
+  height: 580px; /* altura de ejemplo */
+
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.slider {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 .swiper-container {
-  position: fixed;
-  top: 0; /* ajusta la distancia de la parte superior */
+  position: absolute;
+  top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
   width: 100%;
-  z-index: -1;
-  grid-row-start: 1;
-  grid-row-end: 2;
+  height: 580px; /*altura fija para el contenedor*/ 
 }
 .swiper-slide img {
   width: 100vw;
@@ -142,12 +165,15 @@ export default defineComponent({
 }
 
 .search-data{
-  position: relative;
+  position: sticky;
+  margin-top: -400px;
   display: grid;
-  width: 1700px;
-  height: 350px;
+  width: 85vw;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
+  z-index: 1;
+  font-size: 16px;
 
   grid-row-start: 2;
   grid-row-end: 3;
@@ -177,6 +203,7 @@ export default defineComponent({
   height: 100%;
   width: 100%;
   background-color: white;
+  border: #547153 0.2px solid;
 
   align-items: center;
   justify-content: center;
@@ -200,14 +227,14 @@ export default defineComponent({
 }
 
 .information-sara {
-  position: relative;
-  width: 1700px;
-
+  width: 85vw;
+  font-size: 16px;
   margin-left: auto;
   margin-right: auto;
 
   grid-row-start: 3;
   grid-row-end: 4;
+  
   display: grid;
   grid-template-columns: 1fr .2fr;
 }
@@ -242,26 +269,34 @@ p {
 }
 
 .colaborators {
-  position: relative;
-  width: 99vw;
-  height: 180px;
+  width: 100vw;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   grid-row-start: 4;
   grid-row-end: 5;
   background-color: #e6e5a4;
+  margin: 0;
 }
 
 .log-minciencia {
-  width: 400px;
-  height: 73px;
+  width: 25vw;
+  height: auto;
 }
 
 .log-corpoamazonia {
-  width: 150px;
-  height: 105px;
+  width: 8vw;
+  height: auto;
+}
 
+.log-ecojardines {
+  width: 10vw;
+  height: auto;
+}
+
+.fixed-between {
+  margin-right: 50px;
 }
 /* .pannellum {
   margin-top: 6em;
