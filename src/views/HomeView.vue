@@ -74,7 +74,9 @@
     <!--div class="pannellum">
       <v-pannellum :config="config" :src="require('@/assets/amazon.jpg')" style="height: 500px;"></v-pannellum>
     </div-->
-    <!--FooterApp/-->
+    <div class="footer">
+      <FooterApp/>
+    </div>
   </div>
 </template>
 
@@ -88,7 +90,7 @@ import 'swiper/swiper-bundle.css'
 export default defineComponent({
   name: 'HomeView',
   components: {
-    /* FooterApp */
+    FooterApp
   },
   data() {
     return {
@@ -101,6 +103,9 @@ export default defineComponent({
   },
   mounted() {
     const swiper = new Swiper('.swiper-container', {
+      autoplay: {
+        delay: 5000 // tiempo en milisegundos entre cada cambio de imagen
+      },
       // Configuración de Swiper
       navigation: {
         nextEl: '.swiper-button-next',
@@ -110,9 +115,26 @@ export default defineComponent({
         el: '.swiper-pagination',
       },
       slidesPerView: 1,
-      spaceBetween: 10,
+      spaceBetween: 10
     });
-    
+
+    // Obtener el elemento que se moverá hacia arriba
+    const fixedElement = document.querySelector('.c-slider') as HTMLElement;
+    const swiperTopPosition = fixedElement.offsetTop;
+
+    if (fixedElement && fixedElement instanceof HTMLElement) {
+      // Guardar la posición inicial del elemento
+      const initialPosition = fixedElement.getBoundingClientRect().top;
+
+      // Añadir un event listener al evento de scroll de la ventana
+      window.addEventListener('scroll', () => {
+        // Calcular la cantidad de desplazamiento hacia arriba
+        const scrollTop = window.scrollY || window.pageYOffset;
+        
+        // Actualizar la posición top del elemento
+        fixedElement.style.top = `${initialPosition - scrollTop}px`;
+      });     
+    }  
   }
 });
 </script>
@@ -124,41 +146,47 @@ export default defineComponent({
   font-size: 0;
   flex-direction: column;
   display: flex;
+  min-width: 400px;
+
+  width: 100vw;
 
   justify-content: center;
   align-items: center;
 
   display: grid;
-  grid-template-rows: repeat(3, 1fr);
+  grid-template-rows: repeat(3, 1fr) auto;
   grid-row-gap: 0;
 }
 
 .c-slider {
-  position: relative;
+  position: fixed;
+  top: 0;
   width: 100vw;
   height: 580px; /* altura de ejemplo */
+  display: block;
 
   grid-row-start: 1;
   grid-row-end: 2;
 }
 
 .slider {
-  position: absolute;
+  position: relative;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  right: 0;
+  width: 99vw;
+  height: auto;
 }
 
 .swiper-container {
-  position: absolute;
+  position: static;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 99vw;
   height: 580px; /*altura fija para el contenedor*/ 
 }
 .swiper-slide img {
-  width: 100vw;
+  width: 100%;
   height: 580px;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -166,7 +194,6 @@ export default defineComponent({
 
 .search-data{
   position: sticky;
-  margin-top: -400px;
   display: grid;
   width: 85vw;
   height: auto;
@@ -174,6 +201,8 @@ export default defineComponent({
   margin-right: auto;
   z-index: 1;
   font-size: 16px;
+
+  padding-top: 120px;
 
   grid-row-start: 2;
   grid-row-end: 3;
@@ -224,6 +253,12 @@ export default defineComponent({
 .btn:hover {
   background-color: #547153;
   color: white;
+}
+
+@media (max-width: 1900px) {
+  .search-data {
+    padding-top: 0px;
+  }
 }
 
 .information-sara {
@@ -298,8 +333,18 @@ p {
 .fixed-between {
   margin-right: 50px;
 }
+
+.footer {
+  position: relative;
+  width: 100vw;
+  height: auto;
+  padding: 0;
+  margin: 0;
+  bottom: 0;
+  grid-row-start: 5;
+  grid-row-end: 6;
+}
 /* .pannellum {
   margin-top: 6em;
 } */
-
 </style>

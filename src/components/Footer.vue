@@ -1,16 +1,26 @@
 <template>
-  <footer class="footer">
-    <div class="container">
+  <footer>
+    <div class="footer-data">
       <div class="logo">
-        <img src="../assets/corpoamazonia.jpg" alt="Logo de la empresa" style="align-self: center;">
+        <img src="../assets/logotipo-corpoamazonia.png" alt="Logo de la empresa" class="logotipo-corpoamazonia">
       </div>
       <div class="contact">
-        <div class="column">
-          <h4>Dirección</h4>
-          <p>123 Calle Principal, Ciudad</p>
+        <div class="sedes">
+          <h5>Sedes</h5>
+          <p>Sede Principal Mocoa, Putumayo:</p>
+          <p>Cra. 17 14-85</p>
+          <p>Tel: +57 608 4296395,  4296396, 4296642, 4296641, 4295255.</p>
         </div>
-        <div class="column">
-          <h4>Contacto</h4>
+        <div class="linea">
+          <h5>Línea Gratuita</h5>
+          <p>Amazonas, Caquetá y Putumayo: 018000-930506</p>
+          <p>3152370176</p>
+          <p>Horario de Atención:</p>
+          <p>de Lunes a Viernes de 8:00 am a 12:00 m y de 2:00 a 6:00 pm</p>
+          <p>Correo Electrónico:</p>
+        </div>
+        <div class="ubicacion">
+          <h5>Ubícanos</h5>
           <p>Teléfono: (123) 456-7890</p>
           <p>Email: info@miempresa.com</p>
         </div>
@@ -26,47 +36,86 @@ export default {
 </script>
 
 <style scoped>
-.footer {
-  background-color: #333;
+footer {
+  position: sticky;
+  bottom: 0;
+  left: 0; 
+  width: 100vw;
+  height: 250px;
+
+  background-color: #7d8f69;
   color: #fff;
+  
   display: flex;
+  
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  margin-top: auto;
-  position: relative;
-  bottom: 0;
-  left: 0;
-  width: 100vw;
 }
 
-.container {
+.footer-data {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(4, auto);
   grid-gap: 15px;
 }
 
 .logo {
   grid-column-start: 1;
   grid-column-end: 2;
-  width: 180px;
-  height: 180px;
-  border-radius: 20px;
+}
+
+.logotipo-corpoamazonia {
+  width: auto;
+  height: auto;
+  margin: 10px;
 }
 
 .contact {
   grid-column-start: 2;
   grid-column-end: 3;
+
   justify-content: left;
   display: grid;
+
+  display: flex;
+
   grid-template-columns: 1fr 1fr;
   grid-gap: 10px;
 }
 
-.column {
+.sedes {
+  width: auto;
+  height: auto;
   display: flex;
+
   justify-content: center;
   align-items: center;
+
+  grid-column-start: 1;
+  grid-column-end: 2;
+}
+
+.linea {
+  width: auto;
+  height: auto;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  grid-column-start: 2;
+  grid-column-end: 3;
+}
+
+.ubicacion {
+  width: auto;
+  height: auto;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  grid-column-start: 3;
+  grid-column-end: 4;
 }
 </style>

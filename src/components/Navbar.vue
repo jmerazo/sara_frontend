@@ -13,7 +13,6 @@ export default {
   name: "NavbarTop",
   mounted() {
     const navbar = document.querySelector('.navbar');
-
     window.addEventListener('scroll', () => {
       if (window.scrollY > 0) {
         navbar.classList.add('scrolled');
@@ -21,7 +20,7 @@ export default {
         navbar.classList.remove('scrolled');
       }
     });        
-    }
+  }
 }
 </script>
 

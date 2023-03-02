@@ -15,7 +15,8 @@
     "noImplicitAny": false,
     "allowJs": true,
     "types": [
-      "webpack-env"
+      "webpack-env",
+      "jquery"
     ],
     "paths": {
       "@/*": [
