@@ -5,7 +5,6 @@ import store from './store'
 import VuePannellum from 'vue-pannellum'
 import 'bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css'
-import VueTailwind, { Vue3Tailwind } from 'vue3-tailwind'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import Toaster from "@meforma/vue-toaster";
@@ -162,7 +161,6 @@ createApp(App)
     .use(store)
     .use(router)
     .use(Toaster)
-    .use(Vue3Tailwind)
     .component('font-awesome-icon', FontAwesomeIcon)
     .component('VPannellum', VuePannellum)
     .mount('#app')

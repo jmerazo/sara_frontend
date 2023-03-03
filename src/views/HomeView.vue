@@ -17,7 +17,7 @@
     <div class="search-data">
       <div class="info">
         <span class="font-semibold text-lg">CONSULTA DE INFORMACIÓN</span><br><br>
-        <p>
+        <p class="p-h">
           Maecenas eu vehicula enim. Nunc pellentesque hendrerit quam, sit amet euismod justo consequat consequat. Morbi dignissim placerat lacus, 
           sed luctus nunc fermentum id. Morbi aliquam dolor sit amet risus molestie congue. Etiam in urna id lacus facilisis suscipit. In vehicula 
           mi dictum orci tempor gravida. Aenean ut ex in dui consequat commodo non quis ligula. Class aptent taciti sociosqu ad litora torquent per 
@@ -30,6 +30,7 @@
           <span class="text-title-search">FILTRA POR:</span><br>
           <select name="" id="" class="form-control">
             <option value="" disabled selected>Seleccione un valor a filtrar</option>
+            <option value="">Familias</option>
             <option value="">Nombre común</option>
             <option value="">Nombre cientifico</option>
           </select>
@@ -47,7 +48,7 @@
     <div class="information-sara">
       <div class="text-information">
         <span class="title-information">PROYECTO SEMILLAS CTEI</span><br><br>
-        <p>
+        <p class="p-h">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce nec ultricies nisi. Cras in posuere orci, quis lobortis urna. 
           Nulla congue velit et viverra vehicula. Nunc ut ligula purus. Phasellus vitae ultrices lacus. Cras efficitur imperdiet orci, 
           eu faucibus nibh placerat ut. Aenean tincidunt dolor a turpis aliquet, ac commodo augue bibendum. Maecenas tincidunt sed nibh faucibus convallis.
@@ -90,7 +91,7 @@ import 'swiper/swiper-bundle.css'
 export default defineComponent({
   name: 'HomeView',
   components: {
-    FooterApp
+    
   },
   data() {
     return {
@@ -102,20 +103,16 @@ export default defineComponent({
     };
   },
   mounted() {
-    const swiper = new Swiper('.swiper-container', {
+    const mySwiper = new Swiper('.swiper-container', {
+      loop: true,
       autoplay: {
-        delay: 5000 // tiempo en milisegundos entre cada cambio de imagen
-      },
-      // Configuración de Swiper
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
+        delay: 3000, // tiempo en milisegundos entre cada cambio de imagen
+        disableOnInteraction: false,
       },
       pagination: {
         el: '.swiper-pagination',
-      },
-      slidesPerView: 1,
-      spaceBetween: 10
+        clickable: true,
+      }
     });
 
     // Obtener el elemento que se moverá hacia arriba
@@ -145,10 +142,9 @@ export default defineComponent({
   padding: 0;
   font-size: 0;
   flex-direction: column;
-  display: flex;
   min-width: 400px;
 
-  width: 100vw;
+  width: 100%;
 
   justify-content: center;
   align-items: center;
@@ -161,7 +157,7 @@ export default defineComponent({
 .c-slider {
   position: fixed;
   top: 0;
-  width: 100vw;
+  width: 100%;
   height: 580px; /* altura de ejemplo */
   display: block;
 
@@ -294,7 +290,7 @@ export default defineComponent({
   height: 172px;
 }
 
-p {
+.p-h {
   text-align: justify;
 }
 
@@ -304,13 +300,16 @@ p {
 }
 
 .colaborators {
-  width: 100vw;
-  height: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   grid-row-start: 4;
   grid-row-end: 5;
+
+  width: 100%;
+  height: auto;
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
   background-color: #e6e5a4;
   margin: 0;
 }

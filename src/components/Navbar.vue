@@ -27,7 +27,6 @@ export default {
 <style scoped>
 .navbar {
   display: flex;
-  justify-content: center;
   align-items: center;
   justify-content: space-between;
   background-color: transparent;
