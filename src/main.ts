@@ -73,9 +73,16 @@ import {
     faTurnUp,
     faMoneyBill,
     faFilePdf,
-    faFileContract
+    faFileContract,
+    faImage,
+    faLeaf,
+    faSpa,
+    faAppleAlt,
+    faSeedling,
+    faTree
 } from '@fortawesome/free-solid-svg-icons'
 import { 
+    faApple,
     faFacebook, 
     faInstagram, 
     faTwitter, 
@@ -154,7 +161,13 @@ library.add(
     faTurnUp,
     faMoneyBill,
     faFilePdf,
-    faFileContract
+    faFileContract,
+    faImage,
+    faLeaf,
+    faSpa,
+    faAppleAlt,
+    faSeedling,
+    faTree
 )
 
 createApp(App)
