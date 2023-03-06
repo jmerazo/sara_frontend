@@ -1,7 +1,7 @@
 <template>
     <div class="especie">
         <div class="img-general">
-            <img class="img-gral" src="../assets/media/r3.jpg" alt="Imágen general especie">
+            <img class="img-gral" src="../assets/media/r4.jpg" alt="Imágen general especie">
         </div>
 
         <div class="informacion-general">
@@ -10,13 +10,17 @@
                     <h5 class="title-especie">CÓDIGO DE ESPECIE</h5>
                     <p class="text-especie">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod exercitationem quisquam repellendus beatae aliquam, officia voluptates eveniet ipsum unde itaque voluptatem, nesciunt alias repudiandae possimus suscipit et, cupiditate excepturi! Tempora.</p>
                 </div>
-                <div class="nombre-comun">
-                    <h5 class="title-especie">NOMBRE COMÚN</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem deleniti hic, enim est consequuntur ad. Fuga unde nam quidem deleniti. Veniam recusandae molestias aut. Suscipit reiciendis magni eos repellendus magnam?</p>
-                </div>
                 <div class="familia">
                     <h5 class="title-especie">FAMILIA</h5>
                     <p class="text-especie">Lorem ipsum dolor</p>
+                </div>
+                <div class="nombre-cientifico">
+                    <h5 class="title-especie">NOMBRE CIENTÍFICO</h5>
+                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem deleniti hic, enim est consequuntur ad. Fuga unde nam quidem deleniti. Veniam recusandae molestias aut. Suscipit reiciendis magni eos repellendus magnam?</p>
+                </div>
+                <div class="nombre-comun">
+                    <h5 class="title-especie">NOMBRE COMÚN</h5>
+                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem deleniti hic, enim est consequuntur ad. Fuga unde nam quidem deleniti. Veniam recusandae molestias aut. Suscipit reiciendis magni eos repellendus magnam?</p>
                 </div>
                 <div class="otros-nombres">
                     <h5 class="title-especie">OTROS NOMBRES COMUNES</h5>
@@ -34,15 +38,15 @@
                     <h5 class="title-especie">HÁBITO</h5>
                     <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe dolor voluptate consequuntur, eveniet debitis, qui aliquid repellendus assumenda architecto ipsam reprehenderit quasi! Non suscipit necessitatibus sed. Eius officia animi dolore!</p>
                 </div>
-                <div class="forma-copa">
-                    <h5 class="title-especie">FORMA DE LA COPA</h5>
-                    <p class="text-especie">Lorem ipsum</p>
-                </div>
             </div>
 
             <div class="line"></div>
 
             <div class="informacion-dos">
+                <div class="forma-copa">
+                    <h5 class="title-especie">FORMA DE LA COPA</h5>
+                    <p class="text-especie">Lorem ipsum</p>
+                </div>
                 <div class="tipo-hojas">
                     <h5 class="title-especie">TIPO DE HOJAS</h5>
                     <p class="text-especie">Lorem</p>
@@ -97,6 +101,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import FooterApp from "@/components/Footer.vue";
 
 export default defineComponent({
   name: 'EspecieView',
@@ -107,20 +112,20 @@ export default defineComponent({
 
 <style>
 .especie {
-    position: absolute;
+    position: relative;
     width: 100vw;
-    height: 100vh;
+    height: auto;
 
     margin: 0;
     padding: 0;
 
     display: grid;
-    grid-template-rows: repeat(4, 1fr);
+    grid-template-rows: 1fr auto;
     grid-gap: 10px;
 }
 .img-general {
     width: 100vw;
-    height: auto;
+    height: 70vh;
 
     grid-row-start: 1;
     grid-row-end: 2;
@@ -129,6 +134,7 @@ export default defineComponent({
 .img-gral {
     width: 100vw;
     height: 70vh;
+    object-fit: cover;
 }
 
 .informacion-general {
@@ -208,4 +214,5 @@ export default defineComponent({
     grid-row-end: 4;
 
 }
+
 </style>

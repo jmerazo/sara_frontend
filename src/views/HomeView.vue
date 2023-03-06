@@ -37,7 +37,12 @@
         </div>
         <div class="input-search col-8">
           <span class="text-title-search">VALOR A BUSCAR</span><br>
-          <input type="text" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
+          <input type="text" v-model="nombreComunSearch" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
+          <ul v-if="filteredSuggestions.length">
+            <li v-for="suggestion in filteredSuggestions" :key="suggestion">
+              {{ suggestion }}
+            </li>
+          </ul>
         </div>
         <div>
           <button type="submit" class="btn">Buscar</button> 
@@ -83,6 +88,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import axios from 'axios'
 import FooterApp from "@/components/Footer.vue";
 /* import TitleLink from '@/components/Titlelink.vue';*/
 import Swiper from 'swiper'
@@ -100,7 +106,18 @@ export default defineComponent({
         type: 'equirectangular',
         autoLoad: true,
       },
+      especies: [],
+      suggestions: [],
+      nombreComunSearch: "",
     };
+  },
+  filters: {
+    // filtro para filtrar la lista de sugerencias en función de la consulta actual
+    filterSuggestions(suggestions, query) {
+      return suggestions.filter(suggestion => {
+        return suggestion.toLowerCase().includes(query.toLowerCase());
+      });
+    }
   },
   mounted() {
     const mySwiper = new Swiper('.swiper-container', {
@@ -131,7 +148,37 @@ export default defineComponent({
         // Actualizar la posición top del elemento
         fixedElement.style.top = `${initialPosition - scrollTop}px`;
       });     
-    }  
+    } 
+    this.suggestionsSearch();
+  },
+  computed: {
+    // lista de sugerencias filtradas en función de la consulta actual
+    filteredSuggestions() {
+      if (this.$options.filters) {
+        return this.$options.filters.filterSuggestions(this.suggestions, this.nombreComunSearch);      
+      }
+    }
+  },
+  methods: {
+    especiesListar() {
+      axios.get('http://127.0.0.1:5500/')
+      .then(response => {
+        this.especies = response.data;
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    },
+    suggestionsSearch() {
+      axios.get('http://127.0.0.1:5500/')
+      .then(response => {
+        this.suggestions = response.data;
+      })
+      .catch(error => {
+        console.log(error)
+      })
+    }
+
   }
 });
 </script>
@@ -184,6 +231,7 @@ export default defineComponent({
 .swiper-slide img {
   width: 100%;
   height: 580px;
+  object-fit: cover;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
 }
