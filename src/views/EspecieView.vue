@@ -101,11 +101,16 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import FooterApp from "@/components/Footer.vue";
 
 export default defineComponent({
   name: 'EspecieView',
   components: {
+  },
+  data() {
+    return {
+        comunes: [],
+        newComunes: []
+    }
   }
 })
 </script>

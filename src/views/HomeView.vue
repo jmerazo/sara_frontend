@@ -45,7 +45,7 @@
           </ul>
         </div>
         <div>
-          <button type="submit" class="btn" @click="specieToFind">Buscar</button> 
+          <button type="submit" class="btn" @click="specieToFind">Buscar</button>
         </div>       
       </div>
     </div>
@@ -108,9 +108,7 @@ export default defineComponent({
       dataToFind: "",
       filteredSuggestions: [] as string [],
       selectSearchMode: "",
-      familyFound: [] as string [],
-      comunesFound: [] as string [],
-      cientificFound: [] as string []
+      dataFound: [] as string []
     };
   },
   mounted() {
@@ -182,7 +180,7 @@ export default defineComponent({
         await axios.get(`http://127.0.0.1:5500/busqueda/familia/${this.dataToFind}`)
         .then(response => {
           console.log('Familias found: ', response.data)
-          this.familyFound = response.data
+          this.dataFound = response.data
         })
         .catch(error => {
           console.log('Error: ', error)
@@ -192,7 +190,12 @@ export default defineComponent({
         await axios.get(`http://127.0.0.1:5500/busqueda/nombre_comun/${this.dataToFind}`)
         .then(response => {
           console.log('Comunes found: ', response.data)
-          this.comunesFound = response.data
+          this.dataFound = response.data
+
+          // Generar una clave de cifrado aleatoria
+          const key = window.crypto.getRandomValues(new Uint8Array(32));
+          const dataEncrypted = this.encryptData(this.dataFound, key)
+          localStorage.setItem('comunes', JSON.stringify(dataEncrypted))
         })
         .catch(error => {
           console.log('Error: ', error)
@@ -202,12 +205,28 @@ export default defineComponent({
         await axios.get(`http://127.0.0.1:5500/busqueda/nombre_cientifico/${this.dataToFind}`)
         .then(response => {
           console.log('Cientific found: ', response.data)
-          this.cientificFound = response.data
+          this.dataFound = response.data
         })
         .catch(error => {
           console.log('Error: ', error)
         })
       }
+    },
+    encryptData(data, key) {
+      const encoder = new TextEncoder();
+      const dataBuffer = encoder.encode(data);
+      const iv = window.crypto.getRandomValues(new Uint8Array(12));
+      return window.crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, dataBuffer)
+        .then(ciphertext => {
+          return { iv, ciphertext };
+        });
+    },
+    decryptData({ iv, ciphertext }, key) {
+      return window.crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext)
+        .then(decrypted => {
+          const decoder = new TextDecoder();
+          return decoder.decode(decrypted);
+        });
     }
   }
 });
