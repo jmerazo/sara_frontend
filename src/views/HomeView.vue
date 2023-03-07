@@ -30,16 +30,16 @@
           <span class="text-title-search">FILTRA POR:</span><br>
           <select name="" id="" class="form-control">
             <option value="" disabled selected>Seleccione un valor a filtrar</option>
-            <option value="">Familias</option>
-            <option value="">Nombre común</option>
-            <option value="">Nombre cientifico</option>
+            <option value="familia">Familias</option>
+            <option value="nom_comunes">Nombre común</option>
+            <option value="nombre_cientifico">Nombre científico</option>
           </select>
         </div>
         <div class="input-search col-8">
           <span class="text-title-search">VALOR A BUSCAR</span><br>
-          <input type="text" v-model="nombreComunSearch" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
+          <input type="text" v-model="nombreComunSearch" @input="getSuggestions" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
           <ul v-if="filteredSuggestions.length">
-            <li v-for="suggestion in filteredSuggestions" :key="suggestion">
+            <li v-for="suggestion in filteredSuggestions" :key="suggestion" v-on:click="selectSuggestion(suggestion)">
               {{ suggestion }}
             </li>
           </ul>
@@ -80,16 +80,13 @@
     <!--div class="pannellum">
       <v-pannellum :config="config" :src="require('@/assets/amazon.jpg')" style="height: 500px;"></v-pannellum>
     </div-->
-    <div class="footer">
-      <FooterApp/>
-    </div>
+
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from 'axios'
-import FooterApp from "@/components/Footer.vue";
 /* import TitleLink from '@/components/Titlelink.vue';*/
 import Swiper from 'swiper'
 import 'swiper/swiper-bundle.css'
@@ -107,17 +104,10 @@ export default defineComponent({
         autoLoad: true,
       },
       especies: [],
-      suggestions: [],
+      suggestions: [] as string [],
       nombreComunSearch: "",
+      filteredSuggestions: [] as string []
     };
-  },
-  filters: {
-    // filtro para filtrar la lista de sugerencias en función de la consulta actual
-    filterSuggestions(suggestions, query) {
-      return suggestions.filter(suggestion => {
-        return suggestion.toLowerCase().includes(query.toLowerCase());
-      });
-    }
   },
   mounted() {
     const mySwiper = new Swiper('.swiper-container', {
@@ -148,15 +138,6 @@ export default defineComponent({
         // Actualizar la posición top del elemento
         fixedElement.style.top = `${initialPosition - scrollTop}px`;
       });     
-    } 
-    this.suggestionsSearch();
-  },
-  computed: {
-    // lista de sugerencias filtradas en función de la consulta actual
-    filteredSuggestions() {
-      if (this.$options.filters) {
-        return this.$options.filters.filterSuggestions(this.suggestions, this.nombreComunSearch);      
-      }
     }
   },
   methods: {
@@ -169,16 +150,29 @@ export default defineComponent({
         console.log(error)
       })
     },
-    suggestionsSearch() {
-      axios.get('http://127.0.0.1:5500/')
-      .then(response => {
-        this.suggestions = response.data;
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    async getSuggestions() {
+      if(this.nombreComunSearch.length >= 3){
+        await axios.get('http://127.0.0.1:5500/suggestions')
+        .then(response => {
+          this.suggestions = response.data;
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }else{
+        this.suggestions = [];
+      }
+      this.filterSuggestions();
+    },
+    filterSuggestions() {
+      this.filteredSuggestions = this.suggestions.filter(suggestion =>
+        suggestion.toLowerCase().includes(this.nombreComunSearch.toLowerCase())
+      );
+    },
+    selectSuggestion(suggestion) {
+      this.nombreComunSearch = suggestion;
+      this.filteredSuggestions = [];
     }
-
   }
 });
 </script>
@@ -351,7 +345,7 @@ export default defineComponent({
   grid-row-start: 4;
   grid-row-end: 5;
 
-  width: 100%;
+  width: 100vw;
   height: auto;
   display: flex;
 
