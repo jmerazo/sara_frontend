@@ -28,7 +28,7 @@
       <div class="search row">
         <div class="filter col-8">
           <span class="text-title-search">FILTRA POR:</span><br>
-          <select name="" id="" class="form-control">
+          <select v-model="selectSearchMode" class="form-control">
             <option value="" disabled selected>Seleccione un valor a filtrar</option>
             <option value="familia">Familias</option>
             <option value="nom_comunes">Nombre común</option>
@@ -37,7 +37,7 @@
         </div>
         <div class="input-search col-8">
           <span class="text-title-search">VALOR A BUSCAR</span><br>
-          <input type="text" v-model="nombreComunSearch" @input="getSuggestions" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
+          <input type="text" v-model="dataToFind" @input="getSuggestions" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
           <ul v-if="filteredSuggestions.length">
             <li v-for="suggestion in filteredSuggestions" :key="suggestion" v-on:click="selectSuggestion(suggestion)">
               {{ suggestion }}
@@ -45,7 +45,7 @@
           </ul>
         </div>
         <div>
-          <button type="submit" class="btn">Buscar</button> 
+          <button type="submit" class="btn" @click="specieToFind">Buscar</button> 
         </div>       
       </div>
     </div>
@@ -105,8 +105,12 @@ export default defineComponent({
       },
       especies: [],
       suggestions: [] as string [],
-      nombreComunSearch: "",
-      filteredSuggestions: [] as string []
+      dataToFind: "",
+      filteredSuggestions: [] as string [],
+      selectSearchMode: "",
+      familyFound: [] as string [],
+      comunesFound: [] as string [],
+      cientificFound: [] as string []
     };
   },
   mounted() {
@@ -141,8 +145,8 @@ export default defineComponent({
     }
   },
   methods: {
-    especiesListar() {
-      axios.get('http://127.0.0.1:5500/')
+    async especiesListar() {
+      await axios.get('http://127.0.0.1:5500/')
       .then(response => {
         this.especies = response.data;
       })
@@ -151,8 +155,8 @@ export default defineComponent({
       })
     },
     async getSuggestions() {
-      if(this.nombreComunSearch.length >= 3){
-        await axios.get('http://127.0.0.1:5500/suggestions')
+      if(this.dataToFind.length >= 3){
+        await axios.get(`http://127.0.0.1:5500/suggestion/${this.selectSearchMode}`)
         .then(response => {
           this.suggestions = response.data;
         })
@@ -166,12 +170,44 @@ export default defineComponent({
     },
     filterSuggestions() {
       this.filteredSuggestions = this.suggestions.filter(suggestion =>
-        suggestion.toLowerCase().includes(this.nombreComunSearch.toLowerCase())
+        suggestion.toLowerCase().includes(this.dataToFind.toLowerCase())
       );
     },
     selectSuggestion(suggestion) {
-      this.nombreComunSearch = suggestion;
+      this.dataToFind = suggestion;
       this.filteredSuggestions = [];
+    },
+    async specieToFind() {
+      if(this.selectSearchMode == "familia"){
+        await axios.get(`http://127.0.0.1:5500/busqueda/familia/${this.dataToFind}`)
+        .then(response => {
+          console.log('Familias found: ', response.data)
+          this.familyFound = response.data
+        })
+        .catch(error => {
+          console.log('Error: ', error)
+        })
+      }
+      if(this.selectSearchMode == "nom_comunes"){
+        await axios.get(`http://127.0.0.1:5500/busqueda/nombre_comun/${this.dataToFind}`)
+        .then(response => {
+          console.log('Comunes found: ', response.data)
+          this.comunesFound = response.data
+        })
+        .catch(error => {
+          console.log('Error: ', error)
+        })
+      }
+      if(this.selectSearchMode == "nombre_cientifico"){
+        await axios.get(`http://127.0.0.1:5500/busqueda/nombre_cientifico/${this.dataToFind}`)
+        .then(response => {
+          console.log('Cientific found: ', response.data)
+          this.cientificFound = response.data
+        })
+        .catch(error => {
+          console.log('Error: ', error)
+        })
+      }
     }
   }
 });
