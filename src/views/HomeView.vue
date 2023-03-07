@@ -325,6 +325,10 @@ export default defineComponent({
 .imagen-information {
   grid-column-start: 2;
   grid-column-end: 3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .img-information {
