@@ -38,7 +38,7 @@
         <div class="input-search col-8">
           <span class="text-title-search">VALOR A BUSCAR</span><br>
           <input type="text" v-model="dataToFind" @input="getSuggestions" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
-          <ul v-if="filteredSuggestions.length">
+          <ul v-if="filteredSuggestions.length" class="suggestions-list">
             <li v-for="suggestion in filteredSuggestions" :key="suggestion" v-on:click="selectSuggestion(suggestion)">
               {{ suggestion }}
             </li>
@@ -375,6 +375,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 15px;
 }
 
 .img-information {
@@ -434,6 +435,12 @@ export default defineComponent({
   bottom: 0;
   grid-row-start: 5;
   grid-row-end: 6;
+}
+
+.suggestions-list{
+  list-style: none;
+  margin-top: 10px;
+  text-align: left;
 }
 /* .pannellum {
   margin-top: 6em;
