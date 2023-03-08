@@ -1,19 +1,17 @@
 import { createStore } from 'vuex'
-import createPersistedState from 'vuex-persistedstate'
 
 export default createStore({
-  plugins: [createPersistedState()],
   state: {
-    dataFoundStore: null
+    dataToFound: null
   },
   getters: {
     getMyData(state){
-      return state.dataFoundStore
+      return state.dataToFound
     }
   },
   mutations: {
     setMyData(state, newData){
-      state.dataFoundStore = newData
+      state.dataToFound = newData
     }
   },
   actions: {

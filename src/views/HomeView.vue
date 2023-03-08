@@ -45,7 +45,7 @@
           </ul>
         </div>
         <div>
-          <button type="submit" class="btn" @click="specieToFind">Buscar</button>
+          <button type="submit" class="btn" @click="specieToFind()">Buscar</button>
         </div>       
       </div>
     </div>
@@ -87,9 +87,9 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from 'axios'
-/* import TitleLink from '@/components/Titlelink.vue';*/
 import Swiper from 'swiper'
 import 'swiper/swiper-bundle.css'
+import { mapState, mapActions } from 'vuex';
 
 export default defineComponent({
   name: 'HomeView',
@@ -190,12 +190,11 @@ export default defineComponent({
         await axios.get(`http://127.0.0.1:5500/busqueda/nombre_comun/${this.dataToFind}`)
         .then(response => {
           console.log('Comunes found: ', response.data)
-          this.dataFound = response.data
-
-          // Generar una clave de cifrado aleatoria
-          const key = window.crypto.getRandomValues(new Uint8Array(32));
-          const dataEncrypted = this.encryptData(this.dataFound, key)
-          localStorage.setItem('comunes', JSON.stringify(dataEncrypted))
+          this.dataFound = response.data;
+          this.saveInStore();
+          this.$router.push({
+            name: 'especie'
+          })
         })
         .catch(error => {
           console.log('Error: ', error)
@@ -212,22 +211,14 @@ export default defineComponent({
         })
       }
     },
-    encryptData(data, key) {
-      const encoder = new TextEncoder();
-      const dataBuffer = encoder.encode(data);
-      const iv = window.crypto.getRandomValues(new Uint8Array(12));
-      return window.crypto.subtle.encrypt({ name: 'AES-GCM', iv: iv }, key, dataBuffer)
-        .then(ciphertext => {
-          return { iv, ciphertext };
-        });
-    },
-    decryptData({ iv, ciphertext }, key) {
-      return window.crypto.subtle.decrypt({ name: 'AES-GCM', iv }, key, ciphertext)
-        .then(decrypted => {
-          const decoder = new TextDecoder();
-          return decoder.decode(decrypted);
-        });
+    ...mapActions(['updateMyData']),
+    saveInStore(){
+      console.log('Data to store: ', this.dataFound)
+      this.updateMyData(this.dataFound)
     }
+  },
+  computed: {
+    ...mapState(['dataFoundStore'])
   }
 });
 </script>

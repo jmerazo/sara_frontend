@@ -82,12 +82,12 @@ import {
     faTree
 } from '@fortawesome/free-solid-svg-icons'
 import { 
-    faApple,
     faFacebook, 
     faInstagram, 
     faTwitter, 
     faYoutube 
 } from '@fortawesome/free-brands-svg-icons';
+import { createStore } from 'vuex'
 
 library.add(
     faTrash,
