@@ -6,39 +6,39 @@
 
         <div class="informacion-general">
             <div class="informacion-uno">
-                <div class="codigo-especie">
+                <div class="data-especie">
                     <h5 class="title-especie">CÓDIGO DE ESPECIE</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[1] }}</p>
                 </div>
-                <div class="familia">
+                <div class="data-especie">
                     <h5 class="title-especie">FAMILIA</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[6] }}</p>
                 </div>
-                <div class="nombre-cientifico">
+                <div class="data-especie">
                     <h5 class="title-especie">NOMBRE CIENTÍFICO</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[4] }}</p>
                 </div>
-                <div class="nombre-comun">
+                <div class="data-especie">
                     <h5 class="title-especie">NOMBRE COMÚN</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[2] }}</p>
                 </div>
-                <div class="otros-nombres">
+                <div class="data-especie">
                     <h5 class="title-especie">OTROS NOMBRES COMUNES</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[3] }}</p>
                 </div>
-                <div class="sinonimos">
+                <div class="data-especie">
                     <h5 class="title-especie">SINÓNIMOS</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[5] }}</p>
                 </div>
-                <div class="distribucion">
+                <div class="data-especie">
                     <h5 class="title-especie">DISTRIBUCIÓN</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[8] }}</p>
                 </div>
-                <div class="habito">
+                <div class="data-especie">
                     <h5 class="title-especie">HÁBITO</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[9] }}</p>
                 </div>
-                <div class="follaje">
+                <div class="data-especie">
                     <h5 class="title-especie">FOLLAJE</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[10] }}</p>
                 </div>
@@ -47,47 +47,47 @@
             <div class="line"></div>
 
             <div class="informacion-dos">
-                <div class="forma-copa">
+                <div class="data-especie">
                     <h5 class="title-especie">FORMA DE LA COPA</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[11] }}</p>
                 </div>
-                <div class="tipo-hojas">
+                <div class="data-especie">
                     <h5 class="title-especie">TIPO DE HOJAS</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[12] }}</p>
                 </div>
-                <div class="disposicion-hojas">
+                <div class="data-especie">
                     <h5 class="title-especie">DISPOSICIÓN DE LAS HOJAS</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[13] }}</p>
                 </div>
-                <div class="hojas">
+                <div class="data-especie">
                     <h5 class="title-especie">HOJAS</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[15] }}</p>
                     <div class="btn-img-especie">
                         <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'leaf']"/></a>
                     </div>
                 </div>
-                <div class="flor">
+                <div class="data-especie">
                     <h5 class="title-especie">FLOR</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[17] }}</p>
                     <div class="btn-img-especie">
                         <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'spa']"/></a>
                     </div>                
                 </div>
-                <div class="frutos">
+                <div class="data-especie">
                     <h5 class="title-especie">FRUTOS</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[19] }}</p>
                     <div class="btn-img-especie">
                         <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'apple-alt']"/></a>
                     </div>
                 </div>
-                <div class="semillas">
+                <div class="data-especie">
                     <h5 class="title-especie">SEMILLAS</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[21] }}</p>
                     <div class="btn-img-especie">
                         <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'seedling']"/></a>
                     </div>
                 </div>
-                <div class="tallo">
+                <div class="data-especie">
                     <h5 class="title-especie">TALLO</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[22] }}</p>
                     <div class="btn-img-especie">
@@ -162,6 +162,7 @@ export default defineComponent({
 
     display: grid;
     grid-template-columns: 1fr auto 1fr;
+    grid-auto-rows: auto;
 }
 
 .informacion-uno {
@@ -169,10 +170,10 @@ export default defineComponent({
     grid-column-end: 2;
 
     display: grid;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(1, auto);
+    grid-auto-rows: auto;
 
     margin: 40px;
-    width: 90%;
 }
 
 .title-especie {
@@ -182,11 +183,6 @@ export default defineComponent({
 
 .text-especie {
     text-align: left;
-}
-
-.codigo-especie{
-    grid-row-start: 1;
-    grid-row-end: 2;
 }
 
 .line {
@@ -206,10 +202,14 @@ export default defineComponent({
     grid-column-end: 4;
 
     display: grid;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(3, auto);
+    grid-auto-rows: auto;
 
     margin: 40px;
-    width: 90%;
+}
+
+.data-especie{
+    height: auto;
 }
 
 .fi-open-img-found{
@@ -228,7 +228,6 @@ export default defineComponent({
 .consultas-relacionadas {
     grid-row-start: 3;
     grid-row-end: 4;
-
 }
 
 </style>
