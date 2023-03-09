@@ -28,24 +28,24 @@
       <div class="search row">
         <div class="filter col-8">
           <span class="text-title-search">FILTRA POR:</span><br>
-          <select name="" id="" class="form-control">
+          <select v-model="selectSearchMode" class="form-control">
             <option value="" disabled selected>Seleccione un valor a filtrar</option>
-            <option value="">Familias</option>
-            <option value="">Nombre común</option>
-            <option value="">Nombre cientifico</option>
+            <option value="familia">Familias</option>
+            <option value="nom_comunes">Nombre común</option>
+            <option value="nombre_cientifico">Nombre científico</option>
           </select>
         </div>
         <div class="input-search col-8">
           <span class="text-title-search">VALOR A BUSCAR</span><br>
-          <input type="text" v-model="nombreComunSearch" placeholder="Inrgese el valor filtrado a buscar..." class="form-control"/>
-          <ul>
-            <li v-for="suggestion in filteredSuggestions" :key="suggestion">
+          <input type="text" v-model="dataToFind" @input="getSuggestions" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
+          <ul v-if="filteredSuggestions.length" class="suggestions-list">
+            <li v-for="suggestion in filteredSuggestions" :key="suggestion" v-on:click="selectSuggestion(suggestion)">
               {{ suggestion }}
             </li>
           </ul>
         </div>
         <div>
-          <button type="submit" class="btn">Buscar</button> 
+          <button type="submit" class="btn" @click="specieToFind()">Buscar</button>
         </div>       
       </div>
     </div>
@@ -80,19 +80,16 @@
     <!--div class="pannellum">
       <v-pannellum :config="config" :src="require('@/assets/amazon.jpg')" style="height: 500px;"></v-pannellum>
     </div-->
-    <div class="footer">
-      <FooterApp/>
-    </div>
+
   </div>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue';
 import axios from 'axios'
-import FooterApp from "@/components/Footer.vue";
-/* import TitleLink from '@/components/Titlelink.vue';*/
 import Swiper from 'swiper'
 import 'swiper/swiper-bundle.css'
+import { mapState, mapActions } from 'vuex';
 
 export default defineComponent({
   name: 'HomeView',
@@ -107,8 +104,11 @@ export default defineComponent({
         autoLoad: true,
       },
       especies: [],
-      suggestions: [],
-      nombreComunSearch: "",
+      suggestions: [] as string [],
+      dataToFind: "",
+      filteredSuggestions: [] as string [],
+      selectSearchMode: "",
+      dataFound: [] as string []
     };
   },
   mounted() {
@@ -140,19 +140,11 @@ export default defineComponent({
         // Actualizar la posición top del elemento
         fixedElement.style.top = `${initialPosition - scrollTop}px`;
       });     
-    } 
-    this.suggestionsSearch();
-  },
-  computed: {
-    filteredSuggestions() {
-      return this.suggestions.filter((suggestion: { nombreComun: string }) =>
-        suggestion.nombreComun.toLowerCase().includes(this.nombreComunSearch.toLowerCase())
-      )
     }
   },
   methods: {
-    especiesListar() {
-      axios.get('http://127.0.0.1:5500/')
+    async especiesListar() {
+      await axios.get('http://127.0.0.1:5500/')
       .then(response => {
         this.especies = response.data;
       })
@@ -160,17 +152,73 @@ export default defineComponent({
         console.log(error)
       })
     },
-    suggestionsSearch() {
-      axios.get('http://127.0.0.1:5500/')
-      .then(response => {
-        console.log('Sugerencias: ', this.suggestions)
-        this.suggestions = response.data;
-      })
-      .catch(error => {
-        console.log(error)
-      })
+    async getSuggestions() {
+      if(this.dataToFind.length >= 3){
+        await axios.get(`http://127.0.0.1:5500/suggestion/${this.selectSearchMode}`)
+        .then(response => {
+          this.suggestions = response.data;
+        })
+        .catch(error => {
+          console.log(error)
+        })
+      }else{
+        this.suggestions = [];
+      }
+      this.filterSuggestions();
+    },
+    filterSuggestions() {
+      this.filteredSuggestions = this.suggestions.filter(suggestion =>
+        suggestion.toLowerCase().includes(this.dataToFind.toLowerCase())
+      );
+    },
+    selectSuggestion(suggestion) {
+      this.dataToFind = suggestion;
+      this.filteredSuggestions = [];
+    },
+    async specieToFind() {
+      if(this.selectSearchMode == "familia"){
+        await axios.get(`http://127.0.0.1:5500/busqueda/familia/${this.dataToFind}`)
+        .then(response => {
+          console.log('Familias found: ', response.data)
+          this.dataFound = response.data
+        })
+        .catch(error => {
+          console.log('Error: ', error)
+        })
+      }
+      if(this.selectSearchMode == "nom_comunes"){
+        await axios.get(`http://127.0.0.1:5500/busqueda/nombre_comun/${this.dataToFind}`)
+        .then(response => {
+          console.log('Comunes found: ', response.data)
+          this.dataFound = response.data;
+          this.saveInStore();
+          this.$router.push({
+            name: 'especie'
+          })
+        })
+        .catch(error => {
+          console.log('Error: ', error)
+        })
+      }
+      if(this.selectSearchMode == "nombre_cientifico"){
+        await axios.get(`http://127.0.0.1:5500/busqueda/nombre_cientifico/${this.dataToFind}`)
+        .then(response => {
+          console.log('Cientific found: ', response.data)
+          this.dataFound = response.data
+        })
+        .catch(error => {
+          console.log('Error: ', error)
+        })
+      }
+    },
+    ...mapActions(['updateMyData']),
+    saveInStore(){
+      console.log('Data to store: ', this.dataFound)
+      this.updateMyData(this.dataFound)
     }
-
+  },
+  computed: {
+    ...mapState(['dataFoundStore'])
   }
 });
 </script>
@@ -323,6 +371,11 @@ export default defineComponent({
 .imagen-information {
   grid-column-start: 2;
   grid-column-end: 3;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 15px;
 }
 
 .img-information {
@@ -343,7 +396,7 @@ export default defineComponent({
   grid-row-start: 4;
   grid-row-end: 5;
 
-  width: 100%;
+  width: 100vw;
   height: auto;
   display: flex;
 
@@ -382,6 +435,12 @@ export default defineComponent({
   bottom: 0;
   grid-row-start: 5;
   grid-row-end: 6;
+}
+
+.suggestions-list{
+  list-style: none;
+  margin-top: 10px;
+  text-align: left;
 }
 /* .pannellum {
   margin-top: 6em;

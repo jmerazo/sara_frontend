@@ -6,86 +6,90 @@
 
         <div class="informacion-general">
             <div class="informacion-uno">
-                <div class="codigo-especie">
+                <div class="data-especie">
                     <h5 class="title-especie">CÓDIGO DE ESPECIE</h5>
-                    <p class="text-especie">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quod exercitationem quisquam repellendus beatae aliquam, officia voluptates eveniet ipsum unde itaque voluptatem, nesciunt alias repudiandae possimus suscipit et, cupiditate excepturi! Tempora.</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[1] }}</p>
                 </div>
-                <div class="familia">
+                <div class="data-especie">
                     <h5 class="title-especie">FAMILIA</h5>
-                    <p class="text-especie">Lorem ipsum dolor</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[6] }}</p>
                 </div>
-                <div class="nombre-cientifico">
+                <div class="data-especie">
                     <h5 class="title-especie">NOMBRE CIENTÍFICO</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem deleniti hic, enim est consequuntur ad. Fuga unde nam quidem deleniti. Veniam recusandae molestias aut. Suscipit reiciendis magni eos repellendus magnam?</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[4] }}</p>
                 </div>
-                <div class="nombre-comun">
+                <div class="data-especie">
                     <h5 class="title-especie">NOMBRE COMÚN</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem deleniti hic, enim est consequuntur ad. Fuga unde nam quidem deleniti. Veniam recusandae molestias aut. Suscipit reiciendis magni eos repellendus magnam?</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[2] }}</p>
                 </div>
-                <div class="otros-nombres">
+                <div class="data-especie">
                     <h5 class="title-especie">OTROS NOMBRES COMUNES</h5>
-                    <p class="text-especie">no found data</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[3] }}</p>
                 </div>
-                <div class="sinonimos">
+                <div class="data-especie">
                     <h5 class="title-especie">SINÓNIMOS</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi ut temporibus, recusandae neque rerum veritatis laboriosam maxime aut labore architecto sed, qui officiis incidunt itaque enim corporis, perferendis cupiditate consequatur?</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[5] }}</p>
                 </div>
-                <div class="distribucion">
-                    <h5 class="title-especie"></h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia fugit porro delectus, fugiat similique eveniet pariatur nisi! Consequuntur facere a id tempore esse facilis perferendis quis reiciendis. Ut, vitae harum.</p>
+                <div class="data-especie">
+                    <h5 class="title-especie">DISTRIBUCIÓN</h5>
+                    <p class="text-especie">{{ dataFoundStore.specie[8] }}</p>
                 </div>
-                <div class="habito">
+                <div class="data-especie">
                     <h5 class="title-especie">HÁBITO</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe dolor voluptate consequuntur, eveniet debitis, qui aliquid repellendus assumenda architecto ipsam reprehenderit quasi! Non suscipit necessitatibus sed. Eius officia animi dolore!</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[9] }}</p>
+                </div>
+                <div class="data-especie">
+                    <h5 class="title-especie">FOLLAJE</h5>
+                    <p class="text-especie">{{ dataFoundStore.specie[10] }}</p>
                 </div>
             </div>
 
             <div class="line"></div>
 
             <div class="informacion-dos">
-                <div class="forma-copa">
+                <div class="data-especie">
                     <h5 class="title-especie">FORMA DE LA COPA</h5>
-                    <p class="text-especie">Lorem ipsum</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[11] }}</p>
                 </div>
-                <div class="tipo-hojas">
+                <div class="data-especie">
                     <h5 class="title-especie">TIPO DE HOJAS</h5>
-                    <p class="text-especie">Lorem</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[12] }}</p>
                 </div>
-                <div class="disposicion-hojas">
+                <div class="data-especie">
                     <h5 class="title-especie">DISPOSICIÓN DE LAS HOJAS</h5>
-                    <p class="text-especie">Data not found</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[13] }}</p>
                 </div>
-                <div class="hojas">
+                <div class="data-especie">
                     <h5 class="title-especie">HOJAS</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Debitis, labore, at beatae, alias unde voluptate culpa veniam ad consectetur dolore quibusdam doloremque! Dignissimos suscipit repudiandae nulla dolorum! Facilis, quibusdam exercitationem?</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[15] }}</p>
                     <div class="btn-img-especie">
                         <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'leaf']"/></a>
                     </div>
                 </div>
-                <div class="flor">
+                <div class="data-especie">
                     <h5 class="title-especie">FLOR</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati est voluptatum modi, natus, cum eius cupiditate repellat dicta consequuntur dolorem reiciendis eaque numquam perspiciatis facilis quod, iure laborum temporibus neque.</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[17] }}</p>
                     <div class="btn-img-especie">
                         <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'spa']"/></a>
                     </div>                
                 </div>
-                <div class="frutos">
+                <div class="data-especie">
                     <h5 class="title-especie">FRUTOS</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi ut temporibus, recusandae neque rerum veritatis laboriosam maxime aut labore architecto sed, qui officiis incidunt itaque enim corporis, perferendis cupiditate consequatur?</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[19] }}</p>
                     <div class="btn-img-especie">
                         <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'apple-alt']"/></a>
                     </div>
                 </div>
-                <div class="semillas">
+                <div class="data-especie">
                     <h5 class="title-especie">SEMILLAS</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quia fugit porro delectus, fugiat similique eveniet pariatur nisi! Consequuntur facere a id tempore esse facilis perferendis quis reiciendis. Ut, vitae harum.</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[21] }}</p>
                     <div class="btn-img-especie">
                         <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'seedling']"/></a>
                     </div>
                 </div>
-                <div class="tallo">
+                <div class="data-especie">
                     <h5 class="title-especie">TALLO</h5>
-                    <p class="text-especie">Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe dolor voluptate consequuntur, eveniet debitis, qui aliquid repellendus assumenda architecto ipsam reprehenderit quasi! Non suscipit necessitatibus sed. Eius officia animi dolore!</p>
+                    <p class="text-especie">{{ dataFoundStore.specie[22] }}</p>
                     <div class="btn-img-especie">
                         <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'tree']"/></a>
                     </div>
@@ -101,11 +105,23 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import FooterApp from "@/components/Footer.vue";
+import { mapState } from 'vuex';
 
 export default defineComponent({
   name: 'EspecieView',
   components: {
+  },
+  data() {
+    return {
+        comunes: [],
+        newComunes: []
+    }
+  },
+  computed: {
+    ...mapState(['dataFoundStore'])
+  },
+  mounted() {
+/*     console.log('Data: ', this.dataFoundStore.specie) */
   }
 })
 </script>
@@ -146,6 +162,7 @@ export default defineComponent({
 
     display: grid;
     grid-template-columns: 1fr auto 1fr;
+    grid-auto-rows: auto;
 }
 
 .informacion-uno {
@@ -153,10 +170,10 @@ export default defineComponent({
     grid-column-end: 2;
 
     display: grid;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(1, auto);
+    grid-auto-rows: auto;
 
     margin: 40px;
-    width: 90%;
 }
 
 .title-especie {
@@ -166,11 +183,6 @@ export default defineComponent({
 
 .text-especie {
     text-align: left;
-}
-
-.codigo-especie{
-    grid-row-start: 1;
-    grid-row-end: 2;
 }
 
 .line {
@@ -190,10 +202,14 @@ export default defineComponent({
     grid-column-end: 4;
 
     display: grid;
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(3, auto);
+    grid-auto-rows: auto;
 
     margin: 40px;
-    width: 90%;
+}
+
+.data-especie{
+    height: auto;
 }
 
 .fi-open-img-found{
@@ -212,7 +228,6 @@ export default defineComponent({
 .consultas-relacionadas {
     grid-row-start: 3;
     grid-row-end: 4;
-
 }
 
 </style>

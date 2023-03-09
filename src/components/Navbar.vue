@@ -1,6 +1,9 @@
 <template>
   <div class="navbar">
     <a href="#"><img class="log-sara" src="../assets/sara.png"/></a>
+    <div v-if="dataFoundStore != '' && showNameSpecie == true" class="title-specie-navbar">
+      <span>{{ dataFoundStore.specie[4] }}</span>
+    </div>
     <ul class="nav-links">
       <li><a class="text-navbar" href="#">Informes</a></li>
       <li><a class="text-navbar" href="#">Acerca de nosotros</a></li>
@@ -9,8 +12,15 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 export default {
   name: "NavbarTop",
+  data() {
+    return {
+      showNameSpecie: false
+    }
+  },
   mounted() {
     const navbar = document.querySelector('.navbar');
     window.addEventListener('scroll', () => {
@@ -19,7 +29,24 @@ export default {
       } else {
         navbar.classList.remove('scrolled');
       }
-    });        
+    });
+    // Verificar si la ruta actual es "Home"
+    if (this.$route.name === 'especie') {
+      this.showNameSpecie = true; // Mostrar la información si se encuentra en la vista
+    }
+  },
+  computed: {
+    ...mapState(['dataFoundStore'])
+  },
+  watch: {
+    $route(to, from) {
+      // Verificar si la ruta actual es "MyView"
+      if (to.name === 'especie') {
+        this.showNameSpecie = true; // Mostrar la información si se encuentra en la vista
+      } else {
+        this.showNameSpecie = false; // Ocultar la información en cualquier otra vista
+      }
+    }
   }
 }
 </script>
@@ -37,6 +64,18 @@ export default {
   width: 100%;
   height: 80px;
   z-index: 999;
+}
+
+.title-specie-navbar {
+  font-weight: bold;
+  font-size: 25px;
+  font-style: italic;
+  color: black;
+  transition: color 0.3s ease-in-out;
+}
+
+.title-specie-navbar.black {
+  color: black;
 }
 
 .navbar.scrolled {
