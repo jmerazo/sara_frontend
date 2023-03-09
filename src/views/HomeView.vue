@@ -37,8 +37,8 @@
         </div>
         <div class="input-search col-8">
           <span class="text-title-search">VALOR A BUSCAR</span><br>
-          <input type="text" v-model="nombreComunSearch" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
-          <ul v-if="filteredSuggestions.length">
+          <input type="text" v-model="nombreComunSearch" placeholder="Inrgese el valor filtrado a buscar..." class="form-control"/>
+          <ul>
             <li v-for="suggestion in filteredSuggestions" :key="suggestion">
               {{ suggestion }}
             </li>
@@ -111,14 +111,6 @@ export default defineComponent({
       nombreComunSearch: "",
     };
   },
-  filters: {
-    // filtro para filtrar la lista de sugerencias en función de la consulta actual
-    filterSuggestions(suggestions, query) {
-      return suggestions.filter(suggestion => {
-        return suggestion.toLowerCase().includes(query.toLowerCase());
-      });
-    }
-  },
   mounted() {
     const mySwiper = new Swiper('.swiper-container', {
       loop: true,
@@ -152,11 +144,10 @@ export default defineComponent({
     this.suggestionsSearch();
   },
   computed: {
-    // lista de sugerencias filtradas en función de la consulta actual
     filteredSuggestions() {
-      if (this.$options.filters) {
-        return this.$options.filters.filterSuggestions(this.suggestions, this.nombreComunSearch);      
-      }
+      return this.suggestions.filter((suggestion: { nombreComun: string }) =>
+        suggestion.nombreComun.toLowerCase().includes(this.nombreComunSearch.toLowerCase())
+      )
     }
   },
   methods: {
@@ -172,6 +163,7 @@ export default defineComponent({
     suggestionsSearch() {
       axios.get('http://127.0.0.1:5500/')
       .then(response => {
+        console.log('Sugerencias: ', this.suggestions)
         this.suggestions = response.data;
       })
       .catch(error => {
