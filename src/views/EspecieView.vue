@@ -63,9 +63,22 @@
                     <h5 class="title-especie">HOJAS</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[15] }}</p>
                     <div class="btn-img-especie">
-                        <a class="btn" type="submit"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'leaf']"/></a>
+                        <a class="btn" type="submit" @click="showPopup()"><font-awesome-icon class="fi-open-img-found" :icon="['fas', 'leaf']"/></a>
                     </div>
                 </div>
+
+                <!-- This is image popup -->
+                <div v-if="isPopupVisible" class="popup">
+                    <div class="popup-inner">
+                        <button class="close-button" @click="hidePopup()">X</button>
+                        <swiper :options="swiperOptions">
+                            <swiper-slide v-for="(image, index) in images" :key="index">
+                                <img class="img-popup" :src="image" />
+                            </swiper-slide>
+                        </swiper>
+                    </div>
+                </div>
+
                 <div class="data-especie">
                     <h5 class="title-especie">FLOR</h5>
                     <p class="text-especie">{{ dataFoundStore.specie[17] }}</p>
@@ -106,15 +119,40 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { mapState } from 'vuex';
+import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/vue';
+
+SwiperCore.use([Navigation, Pagination, Autoplay]);
+
 
 export default defineComponent({
   name: 'EspecieView',
   components: {
+    Swiper,
+    SwiperSlide,
   },
   data() {
     return {
         comunes: [],
-        newComunes: []
+        newComunes: [],
+        isPopupVisible: false,
+        images: [
+            'https://1.bp.blogspot.com/_k9U0fVIvav8/S9LLChHaHVI/AAAAAAAAAJA/bMBz0eqFMbg/s1600/anacardium_excelsum_ra10858_01.jpg',
+            'https://www.discoverlife.org/IM/I_BC/0000/320/Anacardium_excelsum,_leaf_top,I_BC61.jpg',
+            'https://biogeodb.stri.si.edu/bioinformatics/dfmfiles/files/c/18010/18010_180.jpg',
+        ],
+        swiperOptions: {
+            navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+            },
+            pagination: {
+            el: '.swiper-pagination',
+            },
+            autoplay: {
+            delay: 3000,
+            },
+        },
     }
   },
   computed: {
@@ -122,6 +160,14 @@ export default defineComponent({
   },
   mounted() {
 /*     console.log('Data: ', this.dataFoundStore.specie) */
+  },
+  methods: {
+    showPopup() {
+      this.isPopupVisible = true;
+    },
+    hidePopup() {
+      this.isPopupVisible = false;
+    },
   }
 })
 </script>
@@ -230,4 +276,34 @@ export default defineComponent({
     grid-row-end: 4;
 }
 
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-inner {
+  max-width: 80%;
+  max-height: 80%;
+  overflow: hidden;
+  position: relative;
+}
+
+.close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 9999;
+}
+
+.img-popup {
+    border-radius: 25px;
+}
 </style>
