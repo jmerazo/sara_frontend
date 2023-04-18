@@ -108,7 +108,8 @@ export default defineComponent({
       dataToFind: "",
       filteredSuggestions: [] as string [],
       selectSearchMode: "",
-      dataFound: [] as string []
+      dataFound: [] as string [],
+      dataFamilyFound: [] as string []
     };
   },
   mounted() {
@@ -180,7 +181,7 @@ export default defineComponent({
         await axios.get(`http://127.0.0.1:5500/busqueda/familia/${this.dataToFind}`)
         .then(response => {
           console.log('Familias found: ', response.data)
-          this.dataFound = response.data
+          this.dataFamilyFound = response.data
         })
         .catch(error => {
           console.log('Error: ', error)

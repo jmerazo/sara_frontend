@@ -10,9 +10,20 @@
         
         <div class="familia-data">
             <h4>FAMILIAS</h4>
-            <div>
-                
+            <div> 
                 <span>Data familia</span>
+            </div>
+
+            <div class="container" :class="{ 'expanded': expanded }" @click="toggle">
+                <div class="title">
+                    <h2>Título del contenedor</h2>
+                    <div class="arrow"></div>
+                </div>
+                <ul>
+                    <li>Elemento 1</li>
+                    <li>Elemento 2</li>
+                    <li>Elemento 3</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -31,7 +42,13 @@ export default defineComponent ({
                 // Aquí puedes configurar los parámetros de la imagen panorámica
                 type: 'equirectangular',
                 autoLoad: true,
-            }
+            },
+            expanded: false
+        }
+    },
+    methods: {
+        toggle() {
+            this.expanded = !this.expanded;
         }
     }
 })
@@ -87,5 +104,50 @@ export default defineComponent ({
 
     width: 100%;
     height: 200px;
+}
+
+.container {
+  cursor: pointer;
+  height: 50px;
+  overflow: hidden;
+  transition: height 0.3s ease;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+
+.title h2 {
+  margin: 0;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.arrow {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 6px 6px 0 6px;
+  border-color: #777 transparent transparent transparent;
+  margin-left: 10px;
+  transition: transform 0.3s ease;
+}
+
+ul {
+  margin: 0;
+  margin-top: 15px;
+  padding: 0;
+  list-style: none;
+}
+
+.container.expanded {
+  height: auto;
+}
+
+.container.expanded .arrow {
+  transform: rotate(180deg);
 }
 </style>
