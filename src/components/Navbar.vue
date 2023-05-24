@@ -2,7 +2,7 @@
   <div class="navbar">
     <a href="#"><img class="log-sara" src="../assets/sara.png"/></a>
     <div v-if="dataFoundStore != '' && showNameSpecie == true" class="title-specie-navbar">
-      <span>{{ dataFoundStore.specie[4] }}</span>
+      <span>{{ dataFoundStore.nombre_cientifico }}</span>
     </div>
     <ul class="nav-links">
       <li><a class="text-navbar" href="#">Informes</a></li>

@@ -145,7 +145,7 @@ export default defineComponent({
   },
   methods: {
     async especiesListar() {
-      await axios.get('http://127.0.0.1:5500/')
+      await axios.get('http://127.0.0.1:8000/api/especie_forestal')
       .then(response => {
         this.especies = response.data;
       })
@@ -155,7 +155,7 @@ export default defineComponent({
     },
     async getSuggestions() {
       if(this.dataToFind.length >= 3){
-        await axios.get(`http://127.0.0.1:5500/suggestion/${this.selectSearchMode}`)
+        await axios.get(`http://127.0.0.1:8000/api/especie_forestal/suggestion/${this.selectSearchMode}`)
         .then(response => {
           this.suggestions = response.data;
         })
@@ -188,7 +188,7 @@ export default defineComponent({
         })
       }
       if(this.selectSearchMode == "nom_comunes"){
-        await axios.get(`http://127.0.0.1:5500/busqueda/nombre_comun/${this.dataToFind}`)
+        await axios.get(`http://127.0.0.1:8000/api/especie_forestal/search/nombre_comun/${this.dataToFind}`)
         .then(response => {
           console.log('Comunes found: ', response.data)
           this.dataFound = response.data;
