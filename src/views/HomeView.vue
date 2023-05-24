@@ -116,7 +116,7 @@ export default defineComponent({
     const mySwiper = new Swiper('.swiper-container', {
       loop: true,
       autoplay: {
-        delay: 3000, // tiempo en milisegundos entre cada cambio de imagen
+        delay: 6000, // tiempo en milisegundos entre cada cambio de imagen
         disableOnInteraction: false,
       },
       pagination: {

@@ -6,7 +6,7 @@
     </div>
     <ul class="nav-links">
       <li><a class="text-navbar" href="#">Informes</a></li>
-      <li><a class="text-navbar" href="#">Acerca de nosotros</a></li>
+      <li><a class="text-navbar" href="/about">Acerca de nosotros</a></li>
     </ul>
   </div>
 </template>
