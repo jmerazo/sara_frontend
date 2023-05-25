@@ -9,18 +9,16 @@
         <hr class="separator">
         
         <div class="familia-data">
-            <h4>FAMILIAS</h4>
-            <div> 
-                <span>Data familia</span>
-            </div>
-
-            <div class="container" :class="{ 'expanded': expanded }" @click="toggle">
+            <h4>FAMILIAS</h4><br>
+            <div class="container list-family" :class="{ 'expanded': expanded }" @click="toggle">
                 <div class="title">
                     <h2>{{ dataFamilyStore[0].familia }}</h2>
                     <div class="arrow"></div>
                 </div>
                 <ul>
-                    <li v-for="item in dataFamilyStore" :key="item.ShortcutID">{{ item.nombre_cientifico }}</li>
+                    <li v-for="item in dataFamilyStore" :key="item.nom_comunes" @click="specieListar(item.nom_comunes)">
+                        <router-link :to="'/especie'">{{ item.nom_comunes + " - " + item.nombre_cientifico }}</router-link>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -29,7 +27,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
+import axios from 'axios';
 
 export default defineComponent ({
     name: 'FamilySpecie',
@@ -42,16 +41,35 @@ export default defineComponent ({
                 type: 'equirectangular',
                 autoLoad: true,
             },
-            expanded: false
+            expanded: false,
+            dataFound: [] as string []
         }
     },
     methods: {
         toggle() {
             this.expanded = !this.expanded;
-        }
+        },
+        async specieListar(item){
+            console.log("Dato a buscar: ", item)
+            await axios.get(`http://127.0.0.1:8000/api/especie_forestal/search/nombre_comun/${item}`)
+            .then(response => {
+                console.log('Comunes found: ', response.data)
+                this.dataFound = response.data;
+                this.saveInStore();
+            })
+            .catch(error => {
+                console.log('Error: ', error)
+            })
+        },
+        ...mapActions(['updateMyData']),
+        saveInStore(){
+        console.log('Data to store: ', this.dataFound)
+        this.updateMyData(this.dataFound)
+    }
     },
     computed: {
-        ...mapState(['dataFamilyStore'])
+        ...mapState(['dataFamilyStore']),
+        ...mapState(['dataFoundStore'])
     },
     mounted() {
         console.log(this.dataFamilyStore)
@@ -71,8 +89,7 @@ export default defineComponent ({
     flex-direction: column;
 
     display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-template-columns: auto;
+    grid-template-rows: 1fr auto 1fr 1fr;
 }
 
 .fixed-collage {
@@ -81,20 +98,20 @@ export default defineComponent ({
 
     display: flex;
     justify-content: center;
+
+    grid-row-start: 1;
+    grid-row-end: 2;
     
     margin-bottom: 30px;
 }
 
 .decorator-top {
-    width: 100%;
+    width: 60%;
     height: auto;
     object-fit: cover;
 }
 
 .separator {
-    grid-row-start: 2;
-    grid-row-end: 3;
-
     height: 0;
     border: none;
     border-top: 2px solid #7d8f69;
@@ -102,13 +119,18 @@ export default defineComponent ({
     width: 90%;
     margin-left: auto;
     margin-right: auto;
+
+    grid-row-start: 2;
+    grid-row-end: 3;
 }
 .familia-data{
     grid-row-start: 3;
     grid-row-end: 4;
 
     width: 100%;
-    height: 200px;
+    height: auto;
+    margin-bottom: 30px;
+    margin-top: 30px;
 }
 
 .container {
@@ -125,10 +147,12 @@ export default defineComponent ({
 
 .title h2 {
   margin: 0;
-  margin-left: auto;
-  margin-right: auto;
   font-size: 25px;
   font-weight: bold;
+}
+
+.list-family{
+    text-align: left;
 }
 
 .arrow {

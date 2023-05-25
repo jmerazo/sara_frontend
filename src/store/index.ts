@@ -5,7 +5,8 @@ export default createStore({
   plugins: [createPersistedState()],
   state: {
     dataFoundStore: null,
-    dataFamilyStore: null
+    dataFamilyStore: null,
+    dataNomCientificoStore: null
   },
   getters: {
     getMyData(state){
@@ -13,6 +14,9 @@ export default createStore({
     },
     getFamilyData(state){
       return state.dataFamilyStore
+    },
+    getNomCientificoData(state){
+      return state.dataNomCientificoStore
     }
   },
   mutations: {
@@ -21,6 +25,9 @@ export default createStore({
     },
     setFamilyData(state, newData){
       state.dataFamilyStore = newData
+    },
+    setNomCientificoData(state, newData){
+      state.dataNomCientificoStore = newData
     }
   },
   actions: {
@@ -29,6 +36,9 @@ export default createStore({
     },
     updateFamilyData(context, newData){
       context.commit('setFamilyData', newData)
+    },
+    updateNomCientificoData(context, newData){
+      context.commit('setNomCientificoData', newData)
     }
   },
   modules: {

@@ -109,7 +109,8 @@ export default defineComponent({
       filteredSuggestions: [] as string [],
       selectSearchMode: "",
       dataFound: [] as string [],
-      dataFamilyFound: [] as string []
+      dataFamilyFound: [] as string [],
+      dataNomCientifico: [] as string []
     };
   },
   mounted() {
@@ -209,7 +210,8 @@ export default defineComponent({
         await axios.get(`http://127.0.0.1:5500/busqueda/nombre_cientifico/${this.dataToFind}`)
         .then(response => {
           console.log('Cientific found: ', response.data)
-          this.dataFound = response.data
+          this.dataNomCientifico = response.data,
+          this.saveNomCientificoStore();
         })
         .catch(error => {
           console.log('Error: ', error)
@@ -224,11 +226,16 @@ export default defineComponent({
     ...mapActions(['updateFamilyData']),
     saveFamilyInStore(){
       this.updateFamilyData(this.dataFamilyFound)
+    },
+    ...mapActions(['updateNomCientificoData']),
+    saveNomCientificoStore(){
+      this.updateNomCientificoData(this.dataNomCientifico)
     }
   },
   computed: {
     ...mapState(['dataFoundStore']),
-    ...mapState(['dataFamilyStore'])
+    ...mapState(['dataFamilyStore']),
+    ...mapState(['dataNomCientifico'])
   }
 });
 </script>
@@ -296,8 +303,6 @@ export default defineComponent({
   z-index: 1;
   font-size: 16px;
 
-  padding-top: 120px;
-
   grid-row-start: 2;
   grid-row-end: 3;
   grid-template-columns: 1fr 1fr;
@@ -306,6 +311,17 @@ export default defineComponent({
   align-items: center;
 }
 
+@media (min-width: 900px) {
+  .search-data {
+    padding-top: 100px;
+  }
+}
+
+@media (max-width: 1250) {
+  .search-data {
+    padding-top: 0px;
+  }
+}
 .info{
   width: 850px;
   grid-column-start: 1;
@@ -347,12 +363,6 @@ export default defineComponent({
 .btn:hover {
   background-color: #547153;
   color: white;
-}
-
-@media (max-width: 1900px) {
-  .search-data {
-    padding-top: 0px;
-  }
 }
 
 .information-sara {
