@@ -16,13 +16,11 @@
 
             <div class="container" :class="{ 'expanded': expanded }" @click="toggle">
                 <div class="title">
-                    <h2>Título del contenedor</h2>
+                    <h2>{{ dataFamilyStore[0].familia }}</h2>
                     <div class="arrow"></div>
                 </div>
                 <ul>
-                    <li>Elemento 1</li>
-                    <li>Elemento 2</li>
-                    <li>Elemento 3</li>
+                    <li v-for="item in dataFamilyStore" :key="item.ShortcutID">{{ item.nombre_cientifico }}</li>
                 </ul>
             </div>
         </div>
@@ -31,6 +29,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { mapState } from 'vuex';
 
 export default defineComponent ({
     name: 'FamilySpecie',
@@ -50,6 +49,12 @@ export default defineComponent ({
         toggle() {
             this.expanded = !this.expanded;
         }
+    },
+    computed: {
+        ...mapState(['dataFamilyStore'])
+    },
+    mounted() {
+        console.log(this.dataFamilyStore)
     }
 })
 

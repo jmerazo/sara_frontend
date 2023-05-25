@@ -178,10 +178,14 @@ export default defineComponent({
     },
     async specieToFind() {
       if(this.selectSearchMode == "familia"){
-        await axios.get(`http://127.0.0.1:5500/busqueda/familia/${this.dataToFind}`)
+        await axios.get(`http://127.0.0.1:8000/api/especie_forestal/search/familia/${this.dataToFind}`)
         .then(response => {
           console.log('Familias found: ', response.data)
-          this.dataFamilyFound = response.data
+          this.dataFamilyFound = response.data;
+          this.saveFamilyInStore();
+          this.$router.push({
+            name: 'familia'
+          })
         })
         .catch(error => {
           console.log('Error: ', error)
@@ -216,10 +220,15 @@ export default defineComponent({
     saveInStore(){
       console.log('Data to store: ', this.dataFound)
       this.updateMyData(this.dataFound)
+    },
+    ...mapActions(['updateFamilyData']),
+    saveFamilyInStore(){
+      this.updateFamilyData(this.dataFamilyFound)
     }
   },
   computed: {
-    ...mapState(['dataFoundStore'])
+    ...mapState(['dataFoundStore']),
+    ...mapState(['dataFamilyStore'])
   }
 });
 </script>
