@@ -13,9 +13,9 @@
             <div class="family-list">
                 <div v-for="(item, index) in dataAllFamilyStore" :key="index" class="list-family-item">
                     <h2 class="title">{{ item.familia }}</h2>
-                    <ul>
+                    <ul class="li-text">
                         <li v-for="especie in item.especies" :key="especie" @click="specieListar(especie)">
-                            <router-link :to="'/especie'">{{ especie }}</router-link>
+                            <router-link :to="'/especie'">{{" → " + especie }}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -145,6 +145,10 @@ export default defineComponent ({
 .title-family {
   font-size: 30px;
   font-weight: bold;
+}
+
+.li-text{
+    color: black;
 }
 .arrow {
   width: 0;
