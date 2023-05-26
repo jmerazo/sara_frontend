@@ -58,16 +58,17 @@ export default {
         .then(response => {
           console.log('Familias found: ', response.data)
           this.allFamilyData = response.data;
+          this.saveAllFamilyStore();
         })
         .catch(error => {
           console.log('Error: ', error)
         })
-    }
-  },
-  ...mapActions(['updateAllFamilyData']),
+    },
+    ...mapActions(['updateAllFamilyData']),
     saveAllFamilyStore(){
       this.updateAllFamilyData(this.allFamilyData)
     }
+  }
 }
 </script>
 

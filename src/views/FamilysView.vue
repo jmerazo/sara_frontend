@@ -9,17 +9,16 @@
         <hr class="separator">
         
         <div class="familia-data">
-            <h4>FAMILIAS</h4><br>
-            <div class="container list-family" :class="{ 'expanded': expanded }" @click="toggle">
-                <div class="title">
-                    <h2 v-for="(item, index) in dataAllFamilyStore" :key="index">{{ item.familia }}</h2>
-                    <div class="arrow"></div>
+            <h4 class="title-family">FAMILIAS</h4><br>
+            <div class="family-list">
+                <div v-for="(item, index) in dataAllFamilyStore" :key="index" class="list-family-item">
+                    <h2 class="title">{{ item.familia }}</h2>
+                    <ul>
+                        <li v-for="especie in item.especies" :key="especie" @click="specieListar(especie)">
+                            <router-link :to="'/especie'">{{ especie }}</router-link>
+                        </li>
+                    </ul>
                 </div>
-                <ul>
-                    <li v-for="item in dataAllFamilyStore" :key="item.especies">
-                        <router-link :to="'/especie'">{{ item.especies }}</router-link>
-                    </li>
-                </ul>
             </div>
         </div>
     </div>
@@ -46,9 +45,6 @@ export default defineComponent ({
         }
     },
     methods: {
-        toggle() {
-            this.expanded = !this.expanded;
-        },
         async specieListar(item){
             console.log("Dato a buscar: ", item)
             await axios.get(`http://127.0.0.1:8000/api/especie_forestal/search/nombre_comun/${item}`)
@@ -73,7 +69,7 @@ export default defineComponent ({
         ...mapState(['dataAllFamilyStore'])
     },
     mounted() {
-        console.log(this.dataFamilyStore)
+        console.log('Data all family: ',this.dataAllFamilyStore)
     }
 })
 
@@ -90,7 +86,7 @@ export default defineComponent ({
     flex-direction: column;
 
     display: grid;
-    grid-template-rows: 1fr auto 1fr 1fr;
+    grid-template-rows: auto auto auto 1fr;
 }
 
 .fixed-collage {
@@ -142,20 +138,14 @@ export default defineComponent ({
 }
 
 .title {
-  display: flex;
-  align-items: center;
-}
-
-.title h2 {
-  margin: 0;
-  font-size: 25px;
+  font-size: 20px;
   font-weight: bold;
 }
 
-.list-family{
-    text-align: left;
+.title-family {
+  font-size: 30px;
+  font-weight: bold;
 }
-
 .arrow {
   width: 0;
   height: 0;
@@ -180,4 +170,16 @@ ul {
 .container.expanded .arrow {
   transform: rotate(180deg);
 }
+
+.family-list {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: left;
+  margin-left: 100px;
+}
+
+.list-family-item {
+  width: 30%;
+}
+
 </style>
