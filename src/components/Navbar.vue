@@ -5,20 +5,23 @@
       <span>{{ dataFoundStore.nombre_cientifico }}</span>
     </div>
     <ul class="nav-links">
+      <li><a class="text-navbar" href="/#/familias" @click="allFamily()">Familias</a></li>
       <li><a class="text-navbar" href="#">Informes</a></li>
-      <li><a class="text-navbar" href="/about">Acerca de nosotros</a></li>
+      <li><a class="text-navbar" href="/#/about">Acerca de nosotros</a></li>
     </ul>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
+import axios from 'axios';
 
 export default {
   name: "NavbarTop",
   data() {
     return {
-      showNameSpecie: false
+      showNameSpecie: false,
+      allFamilyData: []
     }
   },
   mounted() {
@@ -36,7 +39,8 @@ export default {
     }
   },
   computed: {
-    ...mapState(['dataFoundStore'])
+    ...mapState(['dataFoundStore']),
+    ...mapState(['dataAllFamilyStore'])
   },
   watch: {
     $route(to, from) {
@@ -47,7 +51,23 @@ export default {
         this.showNameSpecie = false; // Ocultar la información en cualquier otra vista
       }
     }
-  }
+  },
+  methods: {
+    async allFamily(){
+      await axios.get(`http://127.0.0.1:8000/api/especie_forestal/familias`)
+        .then(response => {
+          console.log('Familias found: ', response.data)
+          this.allFamilyData = response.data;
+        })
+        .catch(error => {
+          console.log('Error: ', error)
+        })
+    }
+  },
+  ...mapActions(['updateAllFamilyData']),
+    saveAllFamilyStore(){
+      this.updateAllFamilyData(this.allFamilyData)
+    }
 }
 </script>
 
