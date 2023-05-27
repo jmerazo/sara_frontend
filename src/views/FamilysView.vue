@@ -15,7 +15,7 @@
                     <h2 class="title">{{ item.familia }}</h2>
                     <ul class="li-text">
                         <li v-for="especie in item.especies" :key="especie" @click="specieListar(especie)">
-                            <router-link :to="'/especie'">{{" → " + especie }}</router-link>
+                            <router-link class="text-rl" :to="'/especie'">{{" ► " + especie }}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -119,6 +119,11 @@ export default defineComponent ({
 
     grid-row-start: 2;
     grid-row-end: 3;
+}
+
+.text-rl {
+    text-decoration: none;
+    color: inherit;
 }
 .familia-data{
     grid-row-start: 3;

@@ -2,7 +2,7 @@
   <footer>
     <div class="footer-data">
       <div class="logo">
-        <img src="../assets/logotipo-corpoamazonia.png" alt="Logo de la empresa" class="logotipo-corpoamazonia">
+        <img src="../assets/corpoamazonia-log-white.png" alt="Logo de la empresa" class="logotipo-corpoamazonia">
       </div>
       <div class="contact">
         <div class="sedes">
@@ -49,7 +49,7 @@ footer {
   width: 100vw;
   height: auto;
 
-  background-color: #7d8f69;
+  background-color: #40513B;
   color: #fff;
   
   display: flex;

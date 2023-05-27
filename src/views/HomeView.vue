@@ -16,7 +16,7 @@
 
     <div class="search-data">
       <div class="info">
-        <span class="font-semibold text-lg">CONSULTA DE INFORMACIÓN</span><br><br>
+        <span class="font-bold text-lg text-title-search">CONSULTA DE INFORMACIÓN</span><br><br>
         <p class="p-h">
           Maecenas eu vehicula enim. Nunc pellentesque hendrerit quam, sit amet euismod justo consequat consequat. Morbi dignissim placerat lacus, 
           sed luctus nunc fermentum id. Morbi aliquam dolor sit amet risus molestie congue. Etiam in urna id lacus facilisis suscipit. In vehicula 
@@ -326,7 +326,7 @@ export default defineComponent({
   width: 850px;
   grid-column-start: 1;
   grid-column-end: 2;
-  background-color: #7d8f69;
+  background-color: #4c5f47;
   height: 100%;
   width: 100%;
   border-top-left-radius: 25px;
@@ -342,7 +342,7 @@ export default defineComponent({
   height: 100%;
   width: 100%;
   background-color: white;
-  border: #547153 0.2px solid;
+  border: #4c5f47 1px solid;
 
   align-items: center;
   justify-content: center;
@@ -357,11 +357,11 @@ export default defineComponent({
 
 .btn {
   color: white;
-  background-color: #7d8f69;
+  background-color: #4c5f47;
 }
 
 .btn:hover {
-  background-color: #547153;
+  background-color: #779470;
   color: white;
 }
 
@@ -399,7 +399,7 @@ export default defineComponent({
 }
 
 .img-information {
-  width: 150px;
+  width: 220px;
   height: 172px;
 }
 
@@ -423,7 +423,7 @@ export default defineComponent({
   align-items: center;
   justify-content: center;
 
-  background-color: #e6e5a4;
+  background-color: #EDF1D6;
   margin: 0;
 }
 

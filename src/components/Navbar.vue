@@ -91,7 +91,7 @@ export default {
   font-weight: bold;
   font-size: 25px;
   font-style: italic;
-  color: black;
+  color: white;
   transition: color 0.3s ease-in-out;
 }
 
@@ -100,7 +100,8 @@ export default {
 }
 
 .navbar.scrolled {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: #40513B;
+  color: white;
 }
 
 .log-sara{
@@ -136,7 +137,7 @@ ul {
 }
 
 .nav-links li a {
-  color: black;
+  color: white;
   text-decoration: none;
 }
 
