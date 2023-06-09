@@ -110,7 +110,7 @@ export default defineComponent({
       selectSearchMode: "",
       dataFound: [] as string [],
       dataFamilyFound: [] as string [],
-      dataNomCientifico: [] as string []
+      dataScientificName: [] as string []
     };
   },
   mounted() {
@@ -207,11 +207,14 @@ export default defineComponent({
         })
       }
       if(this.selectSearchMode == "nombre_cientifico"){
-        await axios.get(`http://127.0.0.1:5500/busqueda/nombre_cientifico/${this.dataToFind}`)
+        await axios.get(`http://127.0.0.1:8000/api/especie_forestal/search/scientificname/${this.dataToFind}`)
         .then(response => {
           console.log('Cientific found: ', response.data)
-          this.dataNomCientifico = response.data,
-          this.saveNomCientificoStore();
+          this.dataFound = response.data;
+          this.saveInStore();
+          this.$router.push({
+            name: 'especie'
+          })
         })
         .catch(error => {
           console.log('Error: ', error)
@@ -229,7 +232,7 @@ export default defineComponent({
     },
     ...mapActions(['updateNomCientificoData']),
     saveNomCientificoStore(){
-      this.updateNomCientificoData(this.dataNomCientifico)
+      this.updateNomCientificoData(this.dataScientificName)
     }
   },
   computed: {

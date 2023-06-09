@@ -6,7 +6,7 @@ export default createStore({
   state: {
     dataFoundStore: null,
     dataFamilyStore: null,
-    dataNomCientificoStore: null,
+    dataScientificNameStore: null,
     dataAllFamilyStore: null
   },
   getters: {
@@ -17,7 +17,7 @@ export default createStore({
       return state.dataFamilyStore
     },
     getNomCientificoData(state){
-      return state.dataNomCientificoStore
+      return state.dataScientificNameStore
     },
     getAllFamily(state){
       return state.dataAllFamilyStore
@@ -31,7 +31,7 @@ export default createStore({
       state.dataFamilyStore = newData
     },
     setNomCientificoData(state, newData){
-      state.dataNomCientificoStore = newData
+      state.dataScientificNameStore = newData
     },
     setAllFamilyData(state, newData){
       state.dataAllFamilyStore = newData

@@ -5,6 +5,7 @@
       <span>{{ dataFoundStore.nombre_cientifico }}</span>
     </div>
     <ul class="nav-links">
+      <li><a class="text-navbar" href="/#/familias" @click="allFamily()">Nombres científicos</a></li>
       <li><a class="text-navbar" href="/#/familias" @click="allFamily()">Familias</a></li>
       <li><a class="text-navbar" href="#">Informes</a></li>
       <li><a class="text-navbar" href="/#/about">Acerca de nosotros</a></li>
