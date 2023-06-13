@@ -21,6 +21,7 @@
                 </div>
             </div>
         </div>
+        <PagesQueries></PagesQueries>
     </div>
 </template>
 
@@ -28,10 +29,12 @@
 import { defineComponent } from 'vue';
 import { mapState, mapActions } from 'vuex';
 import axios from 'axios';
+import PagesQueries from '../components/PagesQueries.vue'
 
 export default defineComponent ({
     name: 'FamilySpecie',
     components: {
+        PagesQueries
     },
     data() {
         return {

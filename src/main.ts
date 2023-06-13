@@ -79,7 +79,9 @@ import {
     faSpa,
     faAppleAlt,
     faSeedling,
-    faTree
+    faTree,
+    faQuoteRight,
+    faCopy
 } from '@fortawesome/free-solid-svg-icons'
 import { 
     faFacebook, 
@@ -167,7 +169,9 @@ library.add(
     faSpa,
     faAppleAlt,
     faSeedling,
-    faTree
+    faTree,
+    faQuoteRight,
+    faCopy
 )
 
 createApp(App)

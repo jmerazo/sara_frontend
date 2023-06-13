@@ -7,7 +7,8 @@ export default createStore({
     dataFoundStore: null,
     dataFamilyStore: null,
     dataScientificNameStore: null,
-    dataAllFamilyStore: null
+    dataAllFamilyStore: null,
+    dataAllScientificNameStore: null
   },
   getters: {
     getMyData(state){
@@ -21,6 +22,9 @@ export default createStore({
     },
     getAllFamily(state){
       return state.dataAllFamilyStore
+    },
+    getAllScientificNameStore(state){
+      return state.dataAllScientificNameStore
     }
   },
   mutations: {
@@ -35,6 +39,9 @@ export default createStore({
     },
     setAllFamilyData(state, newData){
       state.dataAllFamilyStore = newData
+    },
+    setAllScientificName(state, newData){
+      state.dataAllScientificNameStore = newData
     }
   },
   actions: {
@@ -49,6 +56,9 @@ export default createStore({
     },
     updateAllFamilyData(context, newData){
       context.commit('setAllFamilyData', newData)
+    },
+    updateAllScientificName(context, newData){
+      context.commit('setAllScientificName', newData)
     }
   },
   modules: {

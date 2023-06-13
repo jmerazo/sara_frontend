@@ -1,5 +1,5 @@
 <template>
-    <div class="familySpecie">
+    <div class="scientificName">
         <div class="fixed-collage">
             <div class="pannellum">
                 <img :src="require('@/assets/prefabs/decorador.png')" class="decorator-top">
@@ -8,20 +8,17 @@
 
         <hr class="separator">
         
-        <div class="familia-data">
-            <h4>FAMILIAS</h4><br>
-            <div class="container list-family" :class="{ 'expanded': expanded }" @click="toggle">
-                <div class="title">
-                    <h2>{{ dataFamilyStore[0].familia }}</h2>
-                    <div class="arrow"></div>
+        <div class="scientific-name-data">
+            <h4 class="title-scientific-name">NOMBRES CIENTÍFICOS</h4><br>
+            <div class="list-scientific-name">
+                <div class="card item-sn" v-for="item in dataAllScientificNameStore" :key="item.nom_comunes" @click="specieListar(item.nom_comunes)">
+                    <router-link :to="'/especie'">{{ item.nombre_cientifico }}</router-link>
                 </div>
-                <ul>
-                    <li v-for="item in dataFamilyStore" :key="item.nom_comunes" @click="specieListar(item.nom_comunes)">
-                        <router-link :to="'/especie'">{{ item.nom_comunes + " - " + item.nombre_cientifico }}</router-link>
-                    </li>
-                </ul>
+
             </div>
         </div>
+
+        <PagesQueries></PagesQueries>
     </div>
 </template>
 
@@ -29,10 +26,12 @@
 import { defineComponent } from 'vue';
 import { mapState, mapActions } from 'vuex';
 import axios from 'axios';
+import PagesQueries from '../components/PagesQueries.vue';
 
 export default defineComponent ({
     name: 'FamilySpecie',
     components: {
+        PagesQueries
     },
     data() {
         return {
@@ -68,11 +67,11 @@ export default defineComponent ({
     }
     },
     computed: {
-        ...mapState(['dataFamilyStore']),
+        ...mapState(['dataAllScientificNameStore']),
         ...mapState(['dataFoundStore'])
     },
     mounted() {
-        console.log(this.dataFamilyStore)
+        console.log(this.dataAllScientificNameStore)
     }
 })
 
@@ -80,7 +79,7 @@ export default defineComponent ({
 </script>
 
 <style scoped>
-.familySpecie {
+.scientificName {
     margin: 0;
     padding: 0;
     width: 100%;
@@ -89,7 +88,11 @@ export default defineComponent ({
     flex-direction: column;
 
     display: grid;
-    grid-template-rows: 1fr auto 1fr 1fr;
+    grid-template-rows: auto 1fr ;
+}
+
+.title-scientific-name{
+    font-weight: bold;
 }
 
 .fixed-collage {
@@ -123,7 +126,7 @@ export default defineComponent ({
     grid-row-start: 2;
     grid-row-end: 3;
 }
-.familia-data{
+.scientific-name-data{
     grid-row-start: 3;
     grid-row-end: 4;
 
@@ -151,8 +154,17 @@ export default defineComponent ({
   font-weight: bold;
 }
 
-.list-family{
-    text-align: left;
+.list-scientific-name{
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+
+    margin-left: 25px;
+    margin-right: 25px;
+    
+}
+
+.item-sn {
+    margin: 10px;
 }
 
 .arrow {

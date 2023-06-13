@@ -3,6 +3,7 @@ import HomeView from '../views/HomeView.vue'
 import EspecieView from '../views/EspecieView.vue'
 import AboutView from '../views/AboutView.vue'
 import FamilysView from '../views/FamilysView.vue'
+import ScientificNameView from '../views/ScientificNameView.vue'
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -29,6 +30,11 @@ const routes: Array<RouteRecordRaw> = [
     path: '/familias',
     name: 'familias',
     component: FamilysView
+  },
+  {
+    path: '/scientificname',
+    name: 'scientificname',
+    component: ScientificNameView
   }
 ]
 

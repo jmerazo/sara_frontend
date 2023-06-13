@@ -37,7 +37,7 @@
         </div>
         <div class="input-search col-8">
           <span class="text-title-search">VALOR A BUSCAR</span><br>
-          <input type="text" v-model="dataToFind" @input="getSuggestions" placeholder="Inrgese el valor filtrado a buscar..." class="form-control">
+          <input type="text" v-model="dataToFind" @input="getSuggestions" placeholder="Ingrese el valor filtrado a buscar..." class="form-control">
           <ul v-if="filteredSuggestions.length" class="suggestions-list">
             <li v-for="suggestion in filteredSuggestions" :key="suggestion" v-on:click="selectSuggestion(suggestion)">
               {{ suggestion }}
@@ -71,9 +71,13 @@
     </div>
 
     <div class="colaborators">
-      <img src="../assets/minciencias-logo.png" class="log-minciencia fixed-between">
-      <img src="../assets/corpoamazonia.png" class="log-corpoamazonia fixed-between">
-      <img src="../assets/logo-eco-jardines.png" class="log-ecojardines fixed-between">
+      <div class="colaborators-fixed">
+        <img src="../assets/minciencias-logo.png" class="log-minciencia fixed-between">
+        <img src="../assets/corpoamazonia.png" class="log-corpoamazonia fixed-between">
+        <img src="../assets/sgr.png" class="log-sgr fixed-between">
+        <img src="../assets/gobernacion-putumayo.png" class="log-gobernacion fixed-between">
+        <img src="../assets/logoitp.png" class="log-itp fixed-between">
+      </div>
     </div>
     
     
@@ -257,12 +261,12 @@ export default defineComponent({
   align-items: center;
 
   display: grid;
-  grid-template-rows: repeat(3, 1fr) auto;
+  grid-template-rows: 1fr repeat(2, auto) auto;
   grid-row-gap: 0;
 }
 
 .c-slider {
-  position: fixed;
+  position: static;
   top: 0;
   width: 100%;
   height: 580px; /* altura de ejemplo */
@@ -297,7 +301,6 @@ export default defineComponent({
 }
 
 .search-data{
-  position: sticky;
   display: grid;
   width: 85vw;
   height: auto;
@@ -305,6 +308,8 @@ export default defineComponent({
   margin-right: auto;
   z-index: 1;
   font-size: 16px;
+  margin-top: 25px;
+  margin-bottom: 25px;
 
   grid-row-start: 2;
   grid-row-end: 3;
@@ -314,17 +319,6 @@ export default defineComponent({
   align-items: center;
 }
 
-@media (min-width: 900px) {
-  .search-data {
-    padding-top: 100px;
-  }
-}
-
-@media (max-width: 1250) {
-  .search-data {
-    padding-top: 0px;
-  }
-}
 .info{
   width: 850px;
   grid-column-start: 1;
@@ -373,6 +367,7 @@ export default defineComponent({
   font-size: 16px;
   margin-left: auto;
   margin-right: auto;
+  margin-bottom: 25px;
 
   grid-row-start: 3;
   grid-row-end: 4;
@@ -430,23 +425,40 @@ export default defineComponent({
   margin: 0;
 }
 
+.colaborators-fixed {
+  margin-top: 25px;
+  margin-bottom: 25px;
+}
+
 .log-minciencia {
   width: 25vw;
   height: auto;
 }
 
 .log-corpoamazonia {
-  width: 8vw;
+  width: 7vw;
   height: auto;
 }
 
-.log-ecojardines {
-  width: 10vw;
+.log-gobernacion {
+  width: 6vw;
+  height: auto;
+}
+
+.log-sgr {
+  width: 12vw;
+  height: auto;
+}
+
+.log-itp {
+  width: 5vw;
   height: auto;
 }
 
 .fixed-between {
   margin-right: 50px;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
 
 .footer {

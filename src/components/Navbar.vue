@@ -5,9 +5,10 @@
       <span>{{ dataFoundStore.nombre_cientifico }}</span>
     </div>
     <ul class="nav-links">
-      <li><a class="text-navbar" href="/#/familias" @click="allFamily()">Nombres científicos</a></li>
+      <li><a class="text-navbar" href="/#/scientificname" @click="allScientificName()">Nombres científicos</a></li>
       <li><a class="text-navbar" href="/#/familias" @click="allFamily()">Familias</a></li>
-      <li><a class="text-navbar" href="#">Informes</a></li>
+      <li><a class="text-navbar" href="#">Glosario</a></li>
+      <li><a class="text-navbar" href="#">Reportes</a></li>
       <li><a class="text-navbar" href="/#/about">Acerca de nosotros</a></li>
     </ul>
   </div>
@@ -22,7 +23,8 @@ export default {
   data() {
     return {
       showNameSpecie: false,
-      allFamilyData: []
+      allFamilyData: [],
+      allScientificNameData: []
     }
   },
   mounted() {
@@ -65,9 +67,23 @@ export default {
           console.log('Error: ', error)
         })
     },
+    async allScientificName(){
+      await axios.get(`http://127.0.0.1:8000/api/especie_forestal/nombres_cientificos`)
+      .then(response => {
+        this.allScientificNameData = response.data;
+        this.saveAllScientificNameStore();
+      })
+      .catch(error => {
+        console.log('Error: ', error)
+      })
+    },
     ...mapActions(['updateAllFamilyData']),
     saveAllFamilyStore(){
       this.updateAllFamilyData(this.allFamilyData)
+    },
+    ...mapActions(['updateAllScientificName']),
+    saveAllScientificNameStore(){
+      this.updateAllScientificName(this.allScientificNameData)
     }
   }
 }

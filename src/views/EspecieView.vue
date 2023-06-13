@@ -106,9 +106,8 @@
             </div>
         </div>
 
-        <div class="consultas-relacionadas">
-            <img src="../assets/logo-eco-jardines.png" alt="">
-        </div>
+        <PagesQueries></PagesQueries>
+        <QuoteButton></QuoteButton>
     </div>
 </template>
 
@@ -117,6 +116,8 @@ import { defineComponent } from 'vue';
 import { mapState } from 'vuex';
 import SwiperCore, { Navigation, Pagination, Autoplay } from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/vue';
+import PagesQueries from '../components/PagesQueries.vue';
+import QuoteButton from '../components/QuoteButton.vue'
 
 SwiperCore.use([Navigation, Pagination, Autoplay]);
 
@@ -126,6 +127,8 @@ export default defineComponent({
   components: {
     Swiper,
     SwiperSlide,
+    PagesQueries,
+    QuoteButton
   },
   data() {
     return {
